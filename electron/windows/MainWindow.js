@@ -27,14 +27,52 @@ class MainWindow extends BrowserWindow {
   createMainMenu = () => {
     const mainMenuTemplate = [
       {
-        label: "File",
+        label: "Controls",
         submenu: [
-          { role: "reload" },
+          {
+            label: "Start/Stop",
+            accelerator: "space",
+            click: () => {
+              this.webContents.send("beats:start-stop");
+            },
+          },
+          {
+            label: "Faster +10",
+            accelerator: "numadd",
+            click: () => {
+              this.webContents.send("beats:change-speed", 10);
+            },
+          },
+          {
+            label: "Slower -10",
+            accelerator: "numsub",
+            click: () => {
+              this.webContents.send("beats:change-speed", -10);
+            },
+          },
+          {
+            label: "Faster +1",
+            accelerator: "Control+numadd",
+            click: () => {
+              this.webContents.send("beats:change-speed", 1);
+            },
+          },
+          {
+            label: "Slower -1",
+            accelerator: "Control+numsub",
+            click: () => {
+              this.webContents.send("beats:change-speed", -1);
+            },
+          },
           {
             label: "Quit",
             role: "quit",
           },
         ],
+      },
+      {
+        label: "Window",
+        submenu: [{ role: "minimize" }, { role: "hide" }],
       },
     ];
 

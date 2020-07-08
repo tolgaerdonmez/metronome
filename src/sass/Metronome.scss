@@ -1,0 +1,112 @@
+@import "colors";
+@import "values";
+.metronome-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .beats {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 5px 0;
+
+    background-color: $blue;
+    box-shadow: inset 0 0 5px darken($dark, 20);
+    border-radius: $radius;
+    .beat {
+      width: 80px;
+      height: 80px;
+
+      margin: 10px 15px;
+
+      background-color: $dark;
+      box-shadow: 0 0 5px darken($dark, 20), inset 0 0 2px darken($dark, 20);
+      border-radius: $radius;
+
+      transition-duration: 200ms;
+    }
+
+    .beat-highlight {
+      animation: beatFadeInOut ease 300ms;
+    }
+  }
+
+  .bpm-input-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 50px 0;
+    * {
+      transition-duration: 300ms;
+    }
+    input {
+      color: $blue;
+      background-color: transparent;
+      border: none;
+      width: 3ch;
+      text-align: center;
+      font-size: 60pt;
+      text-decoration: underline;
+      margin: 0 30px;
+      &:focus-within {
+        outline: none;
+      }
+      &:disabled {
+        color: darken($color: $blue, $amount: 20);
+        text-decoration: none;
+      }
+    }
+    button {
+      border: none;
+      border-radius: 50%;
+      background-color: $blue;
+
+      width: 80px;
+      height: 80px;
+
+      font-size: 50pt;
+      font-weight: 700;
+
+      padding: 0;
+      &:disabled {
+        background-color: darken($color: $blue, $amount: 10);
+      }
+      &:hover {
+        background-color: darken($blue, 5);
+      }
+    }
+  }
+
+  .startButton {
+    width: 300px;
+    height: 300px;
+
+    background-color: $blue;
+    border: none;
+    border-radius: 50%;
+    .material-icons {
+      font-size: 15em;
+    }
+    transition-duration: 300ms;
+    transition-timing-function: ease-out;
+    &:hover {
+      background-color: darken($color: $blue, $amount: 5);
+    }
+  }
+}
+
+@keyframes beatFadeInOut {
+  0% {
+    background-color: $orange;
+  }
+  50% {
+    background-color: $orange;
+  }
+  100% {
+    background-color: $dark;
+  }
+}
