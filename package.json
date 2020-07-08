@@ -17,7 +17,10 @@
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
     "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
     "typescript": "~3.7.2"
   },
   "devDependencies": {
@@ -26,6 +29,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "@types/react-redux": "^7.1.9",
     "asar": "^3.0.3",
     "concurrently": "^5.2.0",
     "electron": "^8.2.5",
@@ -41,7 +45,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "ELECTRON_IS_DEV=1 concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && dev:electron\"",
-    "dev:electron":"ELECTRON_IS_DEV=1 electron .",
+    "dev:electron": "ELECTRON_IS_DEV=1 electron .",
     "package-mac": "electron-builder build --mac -c.extraMetadata.main=build/electron/main.js",
     "package-linux": "electron-builder build --linux appImage -c.extraMetadata.main=build/electron/main.js",
     "package-win": "electron-builder build --win portable -c.extraMetadata.main=build/electron/main.js",

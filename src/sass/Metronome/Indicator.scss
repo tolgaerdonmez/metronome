@@ -1,0 +1,39 @@
+@import "../colors";
+
+.indicator-container {
+  list-style-type: none;
+  height: 150px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  padding: 30px 0;
+
+  background-color: $light-gray;
+  li {
+    border-radius: 50%;
+
+    background-color: $dark-gray-2;
+  }
+
+  .beat-highlight {
+    background-color: $red;
+  }
+
+  .beat-m {
+    width: 80px;
+    height: 80px;
+  }
+  .beat-sm {
+    width: 50px;
+    height: 50px;
+  }
+  .beat-xsm {
+    width: 40px;
+    height: 40px;
+  }
+  .beat-xxsm {
+    width: 32px;
+    height: 32px;
+  }
+}

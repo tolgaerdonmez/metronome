@@ -8,8 +8,8 @@ const { app } = electron;
 let mainWindow;
 
 function createMainWindow() {
-  const width = 500;
-  const height = 800;
+  const width = 600;
+  const height = 550;
   mainWindow = new MainWindow({
     width: width,
     height: height,
