@@ -1,0 +1,59 @@
+@import "../colors";
+
+.preset-selector-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+
+  padding: 20px;
+
+  background-color: $light-gray;
+
+  & > p {
+    margin: 0 0 20px 0;
+    color: $light;
+    font-size: 1.3em;
+  }
+  & > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    * {
+      margin: 0;
+    }
+
+    .preset-screen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      background-color: $dark-gray;
+      border: 6px solid $dark-gray-2;
+
+      width: 4em;
+      height: 4em;
+
+      margin: 0 10px;
+
+      p {
+        color: $green;
+
+        text-align: center;
+        font-size: 3em;
+      }
+    }
+
+    button {
+      background-color: $dark-gray;
+      border: none;
+
+      color: $red;
+      font-size: 1.4em;
+    }
+  }
+}

@@ -1,0 +1,75 @@
+@import "../colors";
+
+.beat-selector-container {
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+
+  background-color: $light-gray;
+
+  height: 100%;
+  width: 100%;
+
+  margin-left: 20px;
+  .beat-controller {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & > div {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      p {
+        flex: 1 0 100px;
+        color: $light;
+        font-size: 2em;
+      }
+      & > div {
+        flex: 1 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        margin-left: 15px;
+
+        button {
+          width: 25px;
+          height: 100%;
+
+          margin: 10px 2.5px;
+
+          border: none;
+          background-color: $dark-gray;
+
+          color: $red;
+          font-size: 1.3em;
+        }
+      }
+    }
+  }
+  .beat-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    p {
+      color: $green;
+      font-size: 2em;
+    }
+    div {
+      width: 50px;
+      height: 5px;
+
+      background-color: $green;
+    }
+  }
+}
