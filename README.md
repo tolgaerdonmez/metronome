@@ -1,6 +1,6 @@
 # Welcome to metronome 👋
 
-![License: GNU GPLv3](https://img.shields.io/badge/License-GPLv3-yellow.svg)
+[![License: GNU GPLv3](https://img.shields.io/badge/License-GPLv3-yellow.svg)](https://github.com/tolgaerdonmez/metronome/blob/master/LICENSE)
 [![Twitter: tolgaerdonmez](https://img.shields.io/twitter/follow/tolgaerdonmez.svg?style=social)](https://twitter.com/tolgaerdonmez)
 
 ## Metronome App with React TypeScript & Electron
