@@ -4,6 +4,8 @@ import React, {
   ButtonHTMLAttributes,
 } from "react";
 import { buttonClick } from "../utils/sounds";
+import { useSelector } from "react-redux";
+import { ReduxState } from "../types/redux";
 
 function UIButton({
   onClick,
@@ -12,10 +14,14 @@ function UIButton({
   ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
 >): ReactElement {
+  const { playing } = useSelector((state: ReduxState) => ({
+    ...state.metronome,
+  }));
+
   return (
     <button
       onClick={(e) => {
-        buttonClick.play();
+        if (!playing) buttonClick.play();
         if (onClick) onClick(e);
       }}
       {...props}

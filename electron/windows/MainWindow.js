@@ -65,6 +65,13 @@ class MainWindow extends BrowserWindow {
             },
           },
           {
+            label: "Toggle Focus Mode",
+            accelerator: "F",
+            click: () => {
+              this.webContents.send("app:toggle-focus", "");
+            },
+          },
+          {
             label: "Quit",
             role: "quit",
           },

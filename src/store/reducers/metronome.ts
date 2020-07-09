@@ -8,6 +8,7 @@ const initialState: MetronomeReducerState = {
   beats: 4,
   notes: 2, // this is the power to calc notes with 2 => 2 ** notes
   preset: 1,
+  beatTimeout: null,
 };
 
 interface Action {
@@ -34,6 +35,11 @@ export default (
       return { ...state, preset: payload };
     case ACTION.SET_CURRENT_BEAT:
       return { ...state, currentBeat: payload };
+    case ACTION.SET_BEAT_TIMEOUT:
+      return { ...state, beatTimeout: payload };
+    case ACTION.CLEAR_BEAT_TIMEOUT:
+      if (state.beatTimeout) clearTimeout(state.beatTimeout);
+      return { ...state, beatTimeout: null };
     default:
       return state;
   }

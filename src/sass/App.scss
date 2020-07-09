@@ -19,11 +19,12 @@ body {
   height: 100vh;
   width: 100%;
   background-color: $dark;
+  overflow: hidden;
 }
 
 #root {
   height: 100%;
-  padding: 15px 20px;
+  padding: 30px;
 
   display: flex;
   justify-content: center;
@@ -69,3 +70,20 @@ body {
 // button {
 //   box-shadow: inset 0 0 5px darken($dark, 20);
 // }
+
+.fade-enter {
+  opacity: 0;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-enter-active {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+}
+.fade-enter-active,
+.fade-exit-active {
+  transition: opacity 500ms;
+}
