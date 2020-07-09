@@ -19,7 +19,7 @@ function PresetSelector(): ReactElement {
   };
 
   return (
-    <div className="preset-selector-container">
+    <div className="preset-selector-container metronome-child-container">
       <p>Sound Preset</p>
       <div>
         <UIButton onClick={() => changePreset(-1)}>{"<"}</UIButton>

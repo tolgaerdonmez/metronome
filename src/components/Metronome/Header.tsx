@@ -76,7 +76,7 @@ class Header extends Component<Props> {
   render() {
     const { bpm, playing } = this.props;
     return (
-      <div className="header-container">
+      <div className="header-container metronome-child-container">
         <button
           className={`power-button ${playing ? "power-button-on" : ""}`}
           onClick={this.togglePower}

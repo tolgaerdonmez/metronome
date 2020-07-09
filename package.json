@@ -44,7 +44,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "ELECTRON_IS_DEV=1 concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && dev:electron\"",
+    "dev": "ELECTRON_IS_DEV=1 concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && yarn dev:electron\"",
     "dev:electron": "ELECTRON_IS_DEV=1 electron .",
     "package-mac": "electron-builder build --mac -c.extraMetadata.main=build/electron/main.js",
     "package-linux": "electron-builder build --linux appImage -c.extraMetadata.main=build/electron/main.js",

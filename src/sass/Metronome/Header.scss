@@ -17,15 +17,16 @@ $height: 71px;
     border-radius: 50%;
   }
   .power-button-on {
-    background-color: $red;
+    background-color: $orange;
   }
 
   .tap-bpm-button {
     height: $height;
     background-color: $dark-gray;
-    color: $light;
+    color: $text;
     font-size: 2em;
     border: none;
+    border-radius: 10px;
   }
 
   .bpm-controller-container {
@@ -36,13 +37,14 @@ $height: 71px;
     input {
       background-color: $dark-gray;
       border: 6px solid $dark-gray-2;
-      color: $green;
+      border-radius: 20px;
+      color: $text;
 
       width: 6ch;
       height: $height;
 
       text-align: center;
-      font-size: 3em;
+      font-size: 2.5em;
       // hiding the number arrows
       -moz-appearance: textfield;
       &::-webkit-outer-spin-button,
@@ -64,8 +66,9 @@ $height: 71px;
 
         background-color: $dark-gray;
         border: none;
+        border-radius: 10px;
 
-        color: $red;
+        color: $orange;
         font-size: 1.4em;
 
         &:first-child {

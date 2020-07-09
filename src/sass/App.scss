@@ -2,10 +2,11 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import "colors";
 @import "values";
+@import "fonts";
 
 * {
   color: $dark;
-  font-family: Roboto;
+  font-family: Rubik;
   font-weight: 400;
   box-sizing: border-box;
   &:focus-within {
@@ -23,15 +24,10 @@ body {
 #root {
   height: 100%;
   padding: 15px 20px;
-}
 
-.container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  margin: 50px 0;
 }
 
 .topMenu {

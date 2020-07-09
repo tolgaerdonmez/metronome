@@ -10,7 +10,7 @@ function Indicator(): ReactElement {
   }));
 
   return (
-    <ul className="indicator-container">
+    <ul className="indicator-container metronome-child-container">
       {[...new Array(beats)].map((_, index) => (
         <li
           key={index}

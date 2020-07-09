@@ -1,6 +1,9 @@
 @import "../colors";
 
 .metronome-container {
+  .metronome-child-container {
+    border-radius: 20px;
+  }
   .bottom-container {
     display: flex;
     align-items: center;

@@ -3,13 +3,7 @@ import Metronome from "./components/Metronome";
 import "./sass/App.scss";
 
 function App() {
-  return (
-    <>
-      <div className="container">
-        <Metronome />
-      </div>
-    </>
-  );
+  return <Metronome />;
 }
 
 export default App;

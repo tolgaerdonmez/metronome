@@ -24,7 +24,7 @@ function BeatSelector(): ReactElement {
   };
 
   return (
-    <div className="beat-selector-container">
+    <div className="beat-selector-container metronome-child-container">
       <div className="beat-controller">
         <div>
           <p>Beats:</p>
