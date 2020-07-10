@@ -41,7 +41,7 @@
 
         margin-left: 15px;
 
-        button {
+        .icon-button {
           width: 25px;
           height: 100%;
 
@@ -50,9 +50,7 @@
           border: none;
           border-radius: 10px;
           background-color: $dark-gray;
-
-          color: $orange;
-          font-size: 1.3em;
+          fill: $orange;
         }
       }
     }

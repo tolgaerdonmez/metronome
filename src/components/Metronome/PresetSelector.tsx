@@ -7,6 +7,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { ReduxState } from "../../types/redux";
 import { setPreset } from "../../store/actions/metronome";
 
+import { ReactComponent as RightArrowIcon } from "../../icons/arrowRight.svg";
+import { ReactComponent as LeftArrowIcon } from "../../icons/arrowLeft.svg";
+
 function PresetSelector(): ReactElement {
   const dispatch = useDispatch();
   const { preset } = useSelector((state: ReduxState) => ({
@@ -22,11 +25,11 @@ function PresetSelector(): ReactElement {
     <div className="preset-selector-container metronome-child-container">
       <p>Sound Preset</p>
       <div>
-        <UIButton onClick={() => changePreset(-1)}>{"<"}</UIButton>
+        <UIButton icon={LeftArrowIcon} onClick={() => changePreset(-1)} />
         <div className="preset-screen">
           <p>{preset}</p>
         </div>
-        <UIButton onClick={() => changePreset(1)}>{">"}</UIButton>
+        <UIButton icon={RightArrowIcon} onClick={() => changePreset(1)} />
       </div>
     </div>
   );

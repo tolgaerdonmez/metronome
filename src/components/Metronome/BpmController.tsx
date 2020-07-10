@@ -1,5 +1,9 @@
 import React, { ReactElement, ChangeEvent } from "react";
+import "../../sass/Metronome/BpmController.scss";
+
 import UIButton from "../UIButton";
+import { ReactComponent as MinusIcon } from "../../icons/minus.svg";
+import { ReactComponent as PlusIcon } from "../../icons/plus.svg";
 
 import { useSelector, useDispatch } from "react-redux";
 import { ReduxState } from "../../types/redux";
@@ -27,8 +31,8 @@ function BpmController(): ReactElement {
     <div className="bpm-controller-container">
       <input type="text" value={bpm} onChange={handleBpmChange} />
       <div>
-        <UIButton onClick={() => adjustBpm(10)}>+</UIButton>
-        <UIButton onClick={() => adjustBpm(-10)}>-</UIButton>
+        <UIButton icon={PlusIcon} onClick={() => adjustBpm(10)} />
+        <UIButton icon={MinusIcon} onClick={() => adjustBpm(-10)} />
       </div>
     </div>
   );

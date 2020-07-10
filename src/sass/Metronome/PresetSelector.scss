@@ -15,7 +15,7 @@
   & > p {
     margin: 0 0 20px 0;
     color: $text;
-    font-size: 1.3em;
+    font-size: 1.4em;
   }
   & > div {
     display: flex;
@@ -49,13 +49,18 @@
       }
     }
 
-    button {
+    .icon-button {
+      width: 30px;
+      height: 30px;
       background-color: $dark-gray;
+      fill: $orange;
       border: none;
       border-radius: 10px;
 
       color: $orange;
       font-size: 1.4em;
+
+      padding: 0;
     }
   }
 }

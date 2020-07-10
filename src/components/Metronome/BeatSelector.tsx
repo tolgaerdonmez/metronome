@@ -2,6 +2,8 @@ import React, { ReactElement } from "react";
 import "../../sass/Metronome/BeatSelector.scss";
 
 import UIButton from "../UIButton";
+import { ReactComponent as MinusIcon } from "../../icons/minus.svg";
+import { ReactComponent as PlusIcon } from "../../icons/plus.svg";
 
 import { useSelector, useDispatch } from "react-redux";
 import { ReduxState } from "../../types/redux";
@@ -29,15 +31,15 @@ function BeatSelector(): ReactElement {
         <div>
           <p>Beats:</p>
           <div>
-            <UIButton onClick={() => changeBeats(-1)}>-</UIButton>
-            <UIButton onClick={() => changeBeats(1)}>+</UIButton>
+            <UIButton icon={MinusIcon} onClick={() => changeBeats(-1)} />
+            <UIButton icon={PlusIcon} onClick={() => changeBeats(1)} />
           </div>
         </div>
         <div>
           <p>Notes:</p>
           <div>
-            <UIButton onClick={() => changeNotes(-1)}>-</UIButton>
-            <UIButton onClick={() => changeNotes(1)}>+</UIButton>
+            <UIButton icon={MinusIcon} onClick={() => changeNotes(-1)} />
+            <UIButton icon={PlusIcon} onClick={() => changeNotes(1)} />
           </div>
         </div>
       </div>

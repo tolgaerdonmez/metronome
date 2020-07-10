@@ -2,7 +2,7 @@ import { ThunkAction } from "redux-thunk";
 import { ReduxState } from "../../types/redux";
 import { Action } from "redux";
 import { bpmToMs } from "../../utils/misc";
-import { mainBeat, secondBeat } from "../../utils/sounds";
+import { beats as beatLoader } from "../../utils/sounds";
 
 export const actions = {
   START: "START",
@@ -29,11 +29,6 @@ export const stop = () => ({
 export const setBpm = (bpm: number) => ({
   type: actions.SET_BPM,
   payload: bpm,
-});
-
-export const setPreset = (preset: number) => ({
-  type: actions.SET_PRESET,
-  payload: preset,
 });
 
 export const setBeats = (beats: number) => ({
@@ -73,6 +68,18 @@ export const clearBeatTimeout = () => ({
   payload: undefined,
 });
 
+let beats = beatLoader(1);
+
+export const setPreset = (preset: number) => {
+  const limit = 9;
+  const _preset = preset > limit ? 1 : preset < 1 ? 1 : preset;
+  beats = beatLoader(_preset);
+  return {
+    type: actions.SET_PRESET,
+    payload: _preset,
+  };
+};
+
 export const startBeats = (): ThunkAction<
   void,
   ReduxState,
@@ -103,7 +110,7 @@ export const stopBeats = (): ThunkAction<
     metronome: { beatTimeout },
   } = getState();
   if (beatTimeout) {
-    secondBeat.playing && secondBeat.stop();
+    beats.second.playing && beats.second.stop();
     dispatch(clearBeatTimeout());
     dispatch(stop());
   }
@@ -120,6 +127,6 @@ export const playBeat = (): ThunkAction<
     metronome: { currentBeat, bpm },
   } = getState();
   if (bpm <= 0) return dispatch(stopBeats);
-  if (currentBeat === 1 || currentBeat === 0) mainBeat.play();
-  else secondBeat.play();
+  if (currentBeat === 1 || currentBeat === 0) beats.main.play();
+  else beats.second.play();
 };

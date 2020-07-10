@@ -1,11 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import "colors";
 @import "values";
 @import "fonts";
 
 // importing animations
 @import "./animations/focus";
+
+p,
+button {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
+}
 
 * {
   color: $dark;
@@ -34,59 +44,6 @@ body {
   align-items: center;
 }
 
-.topMenu {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 50px;
-  .btn {
-    .material-icons {
-      color: $blue;
-      font-size: 30pt;
-    }
-    display: flex;
-    align-items: center;
-  }
-}
-
-.btn {
-  margin: 0;
-  padding: 5px 15px;
-
-  background-color: transparent;
-  color: $blue;
-  box-shadow: none;
-  // box-shadow: inset 0 0 5px darken($dark, 20);
-  border: none;
-  border-radius: $radius;
-
-  font-weight: 500;
-  font-size: 25pt;
-
-  transition-duration: 300ms;
-  &:hover {
-    box-shadow: inset 0 0 5px darken($dark, 20);
-    // background-color: darken($blue, 5);
-  }
-}
-
-// button {
-//   box-shadow: inset 0 0 5px darken($dark, 20);
-// }
-
-.fade-enter {
-  opacity: 0;
-}
-.fade-exit {
-  opacity: 1;
-}
-.fade-enter-active {
-  opacity: 1;
-}
-.fade-exit-active {
-  opacity: 0;
-}
-.fade-enter-active,
-.fade-exit-active {
-  transition: opacity 500ms;
+.ui-button:focus-within {
+  box-shadow: 0 0 1px 1px $orange;
 }
