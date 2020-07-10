@@ -2,18 +2,20 @@ import React, { ReactElement, useEffect } from "react";
 import "../../sass/Metronome/index.scss";
 
 import { useSelector, useDispatch } from "react-redux";
+import { ReduxState } from "../../types/redux";
+import { toggleFocusMode } from "../../store/actions/app";
+
+import { CSSTransition, SwitchTransition } from "react-transition-group";
 
 import Header from "./Header";
 import Indicator from "./Indicator";
 import PresetSelector from "./PresetSelector";
 import BeatSelector from "./BeatSelector";
-import { ReduxState } from "../../types/redux";
 import BpmController from "./BpmController";
 import PowerButton from "./PowerButton";
-import { toggleFocusMode } from "../../store/actions/app";
 import UIButton from "../UIButton";
-import { CSSTransition, SwitchTransition } from "react-transition-group";
-// import { SwitchTransition, CSSTransition } from "react-transition-group";
+
+import { ReactComponent as LeftArrowIcon } from "../../icons/arrowLeft.svg";
 
 function Metronome(): ReactElement {
   const dispatch = useDispatch();
@@ -36,9 +38,8 @@ function Metronome(): ReactElement {
           <UIButton
             className="exit-focus-button"
             onClick={() => dispatch(toggleFocusMode())}
-          >
-            {"<"}
-          </UIButton>
+            icon={LeftArrowIcon}
+          />
           <BpmController />
           <Indicator />
           <PowerButton />
