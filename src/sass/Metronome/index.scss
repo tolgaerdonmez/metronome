@@ -2,6 +2,7 @@
 @import "../values";
 
 .metronome-container {
+  width: 100%;
   .metronome-child-container {
     border-radius: 20px;
     transition: transform ease 300ms, background-color ease 300ms;
@@ -17,6 +18,7 @@
 }
 
 .metronome-container-focused {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,7 +27,7 @@
   height: 100%;
   width: 100%;
 
-  padding: 10px;
+  // padding: 10px;
 
   background-color: $light-gray;
   border-radius: 20px;

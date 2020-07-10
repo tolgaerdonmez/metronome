@@ -15,11 +15,12 @@ function BpmController(): ReactElement {
   const handleBpmChange = (e: ChangeEvent<HTMLInputElement>) => {
     let v = Number(e.target.value);
     if (isNaN(v)) v = 60;
-    dispatch(setBpm(v > 500 ? 500 : v));
+    dispatch(setBpm(v > 500 ? 500 : v < 0 ? 0 : v));
   };
 
   const adjustBpm = (value: number) => {
-    dispatch(setBpm(bpm + value));
+    const v = bpm + value;
+    dispatch(setBpm(v > 500 ? 500 : v < 0 ? 0 : v));
   };
 
   return (

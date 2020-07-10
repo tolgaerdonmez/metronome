@@ -12,6 +12,7 @@ import BpmController from "./BpmController";
 import PowerButton from "./PowerButton";
 import { toggleFocusMode } from "../../store/actions/app";
 import UIButton from "../UIButton";
+import { CSSTransition, SwitchTransition } from "react-transition-group";
 // import { SwitchTransition, CSSTransition } from "react-transition-group";
 
 function Metronome(): ReactElement {
@@ -26,10 +27,12 @@ function Metronome(): ReactElement {
     });
   }, [dispatch]);
 
+  let Render: ReactElement;
+
   if (focusMode)
-    return (
+    Render = (
       <>
-        <div className="metronome-container metronome-container-focused">
+        <div className="metronome-container-focused">
           <UIButton
             className="exit-focus-button"
             onClick={() => dispatch(toggleFocusMode())}
@@ -42,18 +45,31 @@ function Metronome(): ReactElement {
         </div>
       </>
     );
+  else
+    Render = (
+      <div className="metronome-container">
+        <Header />
+        <Indicator />
+        <div className="bottom-container">
+          <PresetSelector />
+          <BeatSelector />
+        </div>
+      </div>
+    );
 
   return (
-    <div className="metronome-container">
-      <Header />
-      <Indicator />
-      <div className="bottom-container">
-        <PresetSelector />
-        <BeatSelector />
-      </div>
-    </div>
+    <SwitchTransition>
+      <CSSTransition
+        key={focusMode ? 1 : 0}
+        addEndListener={(node, done) =>
+          node.addEventListener("transitionend", done, false)
+        }
+        classNames="focus"
+      >
+        {Render}
+      </CSSTransition>
+    </SwitchTransition>
   );
-
   // return (
   //   <div
   //     className={`metronome-container ${

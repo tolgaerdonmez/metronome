@@ -24,8 +24,8 @@ function Indicator(): ReactElement {
 
   return (
     <ul
-      className={`indicator-container ${
-        focusMode ? "indicator-container-focused" : "metronome-child-container "
+      className={`indicator-container metronome-child-container ${
+        focusMode ? "indicator-container-focused" : ""
       }`}
       onClick={toggleFocus}
     >

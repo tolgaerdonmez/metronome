@@ -79,10 +79,13 @@ export const startBeats = (): ThunkAction<
   unknown,
   Action<any>
 > => (dispatch, getState) => {
-  dispatch(playBeat());
   const {
     metronome: { bpm },
   } = getState();
+  if (bpm <= 0) {
+    return dispatch(stopBeats());
+  }
+  dispatch(playBeat());
   const beatTimeout = setTimeout(() => {
     dispatch(startBeats());
   }, bpmToMs(bpm));
@@ -114,8 +117,9 @@ export const playBeat = (): ThunkAction<
 > => (dispatch, getState) => {
   dispatch(incrementBeat());
   const {
-    metronome: { currentBeat },
+    metronome: { currentBeat, bpm },
   } = getState();
+  if (bpm <= 0) return dispatch(stopBeats);
   if (currentBeat === 1 || currentBeat === 0) mainBeat.play();
   else secondBeat.play();
 };

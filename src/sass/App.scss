@@ -4,6 +4,9 @@
 @import "values";
 @import "fonts";
 
+// importing animations
+@import "./animations/focus";
+
 * {
   color: $dark;
   font-family: Rubik;
