@@ -1,0 +1,19 @@
+@mixin blink($from, $to, $timeout) {
+  .blink-enter {
+    background-color: $from;
+  }
+  .blink-enter-active {
+    background-color: $to;
+    transition: background-color ease $timeout;
+  }
+  .blink-enter-done {
+    background-color: $to;
+  }
+  .blink-exit {
+    background-color: $to;
+  }
+  .blink-exit-active {
+    background-color: $from;
+    transition: background-color ease $timeout;
+  }
+}

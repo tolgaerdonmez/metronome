@@ -1,6 +1,8 @@
 @import "../colors";
+@import "../animations/blink";
 
 .indicator-container {
+  @include blink($dark-gray-2, $orange, 200ms);
   list-style-type: none;
   height: 150px;
   width: 100%;
@@ -15,10 +17,6 @@
     border-radius: 50%;
 
     background-color: $dark-gray-2;
-  }
-
-  .beat-highlight {
-    background-color: $orange;
   }
 
   &:hover {

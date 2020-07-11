@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { ReduxState } from "../../types/redux";
 import { toggleFocusMode } from "../../store/actions/app";
 import { buttonClick } from "../../utils/sounds";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 function Indicator(): ReactElement {
   const dispatch = useDispatch();
@@ -22,30 +23,36 @@ function Indicator(): ReactElement {
       }
     : () => {};
 
+  const beatClassName = `beat ${
+    beats >= 6 && beats < 11
+      ? " beat-sm"
+      : beats >= 11 && beats <= 13
+      ? " beat-xsm"
+      : beats > 13
+      ? " beat-xxsm"
+      : " beat-m"
+  }`;
+
   return (
-    <ul
-      className={`indicator-container metronome-child-container ${
-        focusMode ? "indicator-container-focused" : ""
-      }`}
-      onClick={toggleFocus}
-    >
-      {[...new Array(beats)].map((_, index) => (
-        <li
-          key={index}
-          className={`beat 
-    ${index + 1 === currentBeat ? " beat-highlight" : ""}
-    ${
-      beats >= 6 && beats < 11
-        ? " beat-sm"
-        : beats >= 11 && beats <= 13
-        ? " beat-xsm"
-        : beats > 13
-        ? " beat-xxsm"
-        : " beat-m"
-    }`}
-        ></li>
-      ))}
-    </ul>
+    <TransitionGroup>
+      <ul
+        className={`indicator-container metronome-child-container ${
+          focusMode ? "indicator-container-focused" : ""
+        }`}
+        onClick={toggleFocus}
+      >
+        {[...new Array(beats)].map((_, index) => (
+          <CSSTransition
+            in={index + 1 === currentBeat}
+            key={index}
+            timeout={200}
+            classNames="blink"
+          >
+            <li key={index} className={beatClassName} />
+          </CSSTransition>
+        ))}
+      </ul>
+    </TransitionGroup>
   );
 }
 
