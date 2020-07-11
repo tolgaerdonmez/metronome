@@ -53,7 +53,7 @@ function UIButton({
       onClick={_onClick}
       className={_className}
       {...(props as ButtonProps)}
-    ></button>
+    />
   );
 }
 

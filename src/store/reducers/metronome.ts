@@ -9,6 +9,12 @@ const initialState: MetronomeReducerState = {
   notes: 2, // this is the power to calc notes with 2 => 2 ** notes
   preset: 1,
   beatTimeout: null,
+  tapBpm: {
+    count: 0,
+    endTime: 0,
+    startTime: 0,
+    focusMode: false,
+  },
 };
 
 interface Action {
@@ -26,7 +32,9 @@ export default (
     case ACTION.STOP:
       return { ...state, playing: false, currentBeat: 0 };
     case ACTION.SET_BPM:
-      return { ...state, bpm: payload };
+      let bpm = payload;
+      if (bpm > 500) bpm = 500;
+      return { ...state, bpm: bpm };
     case ACTION.SET_BEATS:
       return { ...state, beats: payload };
     case ACTION.SET_NOTES:
@@ -40,6 +48,16 @@ export default (
     case ACTION.CLEAR_BEAT_TIMEOUT:
       if (state.beatTimeout) clearTimeout(state.beatTimeout);
       return { ...state, beatTimeout: null };
+    case ACTION.TOGGLE_TAP_BPM_FOCUS:
+      return {
+        ...state,
+        tapBpm: { ...state.tapBpm, focusMode: !state.tapBpm.focusMode },
+      };
+    case ACTION.SET_TAP_BPM:
+      return {
+        ...state,
+        tapBpm: { ...state.tapBpm, ...payload },
+      };
     default:
       return state;
   }

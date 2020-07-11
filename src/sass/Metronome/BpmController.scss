@@ -27,7 +27,7 @@
     }
 
     transition: background-color ease 300ms;
-    &:hover {
+    &:hover:not(:disabled) {
       background-color: darken($dark-gray, 7);
     }
   }

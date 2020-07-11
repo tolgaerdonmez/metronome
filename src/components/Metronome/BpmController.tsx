@@ -9,7 +9,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { ReduxState } from "../../types/redux";
 import { setBpm } from "../../store/actions/metronome";
 
-function BpmController(): ReactElement {
+interface Props {
+  controllable?: boolean;
+}
+
+function BpmController({ controllable }: Props): ReactElement {
   const dispatch = useDispatch();
   const { bpm } = useSelector((state: ReduxState) => ({
     ...state.metronome,
@@ -29,11 +33,18 @@ function BpmController(): ReactElement {
 
   return (
     <div className="bpm-controller-container">
-      <input type="text" value={bpm} onChange={handleBpmChange} />
-      <div>
-        <UIButton icon={PlusIcon} onClick={() => adjustBpm(10)} />
-        <UIButton icon={MinusIcon} onClick={() => adjustBpm(-10)} />
-      </div>
+      <input
+        type="text"
+        value={bpm}
+        onChange={handleBpmChange}
+        disabled={controllable === false}
+      />
+      {controllable !== false ? (
+        <div>
+          <UIButton icon={PlusIcon} onClick={() => adjustBpm(10)} />
+          <UIButton icon={MinusIcon} onClick={() => adjustBpm(-10)} />
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { ThunkAction } from "redux-thunk";
-import { ReduxState } from "../../types/redux";
+import { ReduxState, TapBpm } from "../../types/redux";
 import { Action } from "redux";
 import { bpmToMs } from "../../utils/misc";
 import { beats as beatLoader } from "../../utils/sounds";
@@ -14,6 +14,8 @@ export const actions = {
   SET_CURRENT_BEAT: "SET_CURRENT_BEAT",
   SET_BEAT_TIMEOUT: "SET_BEAT_TIMEOUT",
   CLEAR_BEAT_TIMEOUT: "CLEAR_BEAT_TIMEOUT",
+  TOGGLE_TAP_BPM_FOCUS: "TOGGLE_TAP_BPM_FOCUS",
+  SET_TAP_BPM: "SET_TAP_BPM",
 };
 
 export const start = () => ({
@@ -126,7 +128,71 @@ export const playBeat = (): ThunkAction<
   const {
     metronome: { currentBeat, bpm },
   } = getState();
-  if (bpm <= 0) return dispatch(stopBeats);
+  if (bpm <= 0 || bpm > 500) return dispatch(stopBeats);
   if (currentBeat === 1 || currentBeat === 0) beats.main.play();
   else beats.second.play();
+};
+
+export const setTapBpm = (tapBpm: Partial<TapBpm>) => ({
+  type: actions.SET_TAP_BPM,
+  payload: tapBpm,
+});
+
+export const toggleTapBpmFocus = (): ThunkAction<
+  void,
+  ReduxState,
+  unknown,
+  Action<any>
+> => (dispatch) => {
+  dispatch(stopBeats());
+  dispatch({
+    type: actions.TOGGLE_TAP_BPM_FOCUS,
+    payload: undefined,
+  });
+};
+
+export const startTapBpm = (): ThunkAction<
+  void,
+  ReduxState,
+  unknown,
+  Action<any>
+> => (dispatch) => {
+  const startTime = Date.now();
+  dispatch(setTapBpm({ startTime, count: 1 }));
+};
+
+export const incrementTapCount = (): ThunkAction<
+  void,
+  ReduxState,
+  unknown,
+  Action<any>
+> => (dispatch, getState) => {
+  const {
+    metronome: {
+      tapBpm: { count },
+    },
+  } = getState();
+  console.log("increment tap count");
+  const newEndTime = Date.now();
+  dispatch(setTapBpm({ endTime: newEndTime, count: count + 1 }));
+  dispatch(calculateTappedBpm());
+};
+
+export const calculateTappedBpm = (): ThunkAction<
+  void,
+  ReduxState,
+  unknown,
+  Action<any>
+> => (dispatch, getState) => {
+  const {
+    metronome: {
+      tapBpm: { count, startTime, endTime },
+    },
+  } = getState();
+
+  const deltaTime = endTime - startTime;
+  const rawBpm = (count * 60_000) / deltaTime;
+  const bpm = Math.floor(rawBpm);
+
+  dispatch(setBpm(bpm));
 };
