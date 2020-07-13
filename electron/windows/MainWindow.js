@@ -78,15 +78,16 @@ class MainWindow extends BrowserWindow {
               this.webContents.send("beats:tap-bpm", "");
             },
           },
-          {
-            label: "Quit",
-            role: "quit",
-          },
         ],
       },
       {
         label: "Window",
-        submenu: [{ role: "minimize" }, { role: "hide" }],
+        submenu: [
+          { role: "minimize" },
+          { role: "hide" },
+          { role: "close" },
+          { role: "quit" },
+        ],
       },
     ];
 

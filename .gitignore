@@ -151,3 +151,4 @@ yarn.lock
 ### for a while
 assets/
 *.old.*
+sound_old
