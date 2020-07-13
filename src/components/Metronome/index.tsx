@@ -69,6 +69,7 @@ function Metronome(): ReactElement {
   useEffect(() => {
     const tap = () => {
       if (tapBpm.focusMode) {
+        if (playing) dispatch(stopBeats());
         if (tapBpm.startTime) dispatch(incrementTapCount());
         else dispatch(startTapBpm());
         buttonClick.play();
@@ -80,7 +81,7 @@ function Metronome(): ReactElement {
     return () => {
       window.ipcRenderer.off("beats:tap-bpm", tap);
     };
-  }, [dispatch, tapBpm.count, tapBpm.startTime, tapBpm.focusMode]);
+  }, [dispatch, tapBpm.count, tapBpm.startTime, tapBpm.focusMode, playing]);
 
   let Render: ReactElement;
 

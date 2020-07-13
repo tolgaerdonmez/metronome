@@ -51,7 +51,7 @@ export default (
     case ACTION.TOGGLE_TAP_BPM_FOCUS:
       return {
         ...state,
-        tapBpm: { ...state.tapBpm, focusMode: !state.tapBpm.focusMode },
+        tapBpm: { ...initialState.tapBpm, focusMode: !state.tapBpm.focusMode },
       };
     case ACTION.SET_TAP_BPM:
       return {

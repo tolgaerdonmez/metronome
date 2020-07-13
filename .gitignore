@@ -149,6 +149,6 @@ yarn-error.log*
 yarn.lock
 
 ### for a while
-assets/
+assets/example
 *.old.*
 sound_old

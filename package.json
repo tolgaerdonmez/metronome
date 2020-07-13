@@ -1,5 +1,6 @@
 {
   "name": "metronome",
+  "productName": "Metronome",
   "version": "0.1.0",
   "private": true,
   "main": "electron/main.js",
@@ -57,7 +58,7 @@
     "prepackage-win": "yarn prepackage"
   },
   "build": {
-    "appId": "com.example.electron-cra",
+    "appId": "com.tolgaerdonmez.metronome",
     "files": [
       "build/**/*",
       "node_modules/**/*"

@@ -21,7 +21,7 @@ function createMainWindow() {
       preload: path.join(__dirname, "preload.js"),
       backgroundThrottling: false,
     },
-    icon: path.join(__dirname, "assets/icons/png/1204x1024.png"),
+    icon: path.join(__dirname, "assets/icons/Icon.icns"),
   });
 
   mainWindow.on("close", () => {

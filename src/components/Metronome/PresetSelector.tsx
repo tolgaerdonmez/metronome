@@ -12,14 +12,14 @@ import { ReactComponent as LeftArrowIcon } from "../../icons/arrowLeft.svg";
 
 function PresetSelector(): ReactElement {
   const dispatch = useDispatch();
-  const { preset } = useSelector((state: ReduxState) => ({
+  const { preset, playing } = useSelector((state: ReduxState) => ({
     ...state.metronome,
   }));
 
   const changePreset = (direction: number) => {
     const p = preset + direction;
     dispatch(setPreset(p <= 0 ? 1 : p));
-    beats.second.play();
+    if (!playing) beats.second.play();
   };
 
   return (
