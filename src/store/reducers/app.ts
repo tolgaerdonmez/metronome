@@ -17,6 +17,8 @@ export default (
   switch (type) {
     case ACTION.TOGGLE_FOCUS_MODE:
       return { ...state, focusMode: !state.focusMode };
+    case "RESET":
+      return initialState;
     default:
       return state;
   }

@@ -73,7 +73,7 @@ export const clearBeatTimeout = () => ({
 export let beats = beatLoader(1);
 
 export const setPreset = (preset: number) => {
-  const limit = 10;
+  const limit = 11;
   const _preset = preset > limit ? 1 : preset < 1 ? 1 : preset;
   beats = beatLoader(_preset);
   return {

@@ -91,11 +91,17 @@ class MainWindow extends BrowserWindow {
       },
     ];
 
-    if (process.platform === "darwin") {
-      mainMenuTemplate.unshift({
-        label: app.name,
-      });
-    }
+    const appNamedMenu = {
+      label: app.name,
+      submenu: [
+        {
+          label: "Reset App",
+          click: () => {
+            this.webContents.send("app:reset");
+          },
+        },
+      ],
+    };
 
     if (isDev) {
       mainMenuTemplate.push({
@@ -113,7 +119,10 @@ class MainWindow extends BrowserWindow {
       });
     }
 
-    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
+    const mainMenu = Menu.buildFromTemplate([
+      appNamedMenu,
+      ...mainMenuTemplate,
+    ]);
     Menu.setApplicationMenu(mainMenu);
   };
 

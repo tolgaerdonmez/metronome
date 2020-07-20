@@ -26,6 +26,7 @@
 }
 
 .indicator-container-focused {
+  width: 100%;
   background-color: transparent;
   &:hover {
     background-color: $light-gray;

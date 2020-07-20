@@ -34,7 +34,7 @@ function Indicator(): ReactElement {
   }`;
 
   return (
-    <TransitionGroup>
+    <TransitionGroup style={{ width: "100%" }}>
       <ul
         className={`indicator-container metronome-child-container ${
           focusMode ? "indicator-container-focused" : ""

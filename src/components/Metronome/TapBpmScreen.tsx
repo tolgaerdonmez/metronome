@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactElement } from "react";
 import "../../sass/Metronome/TabBpmScreen.scss";
 
 import { useDispatch, useSelector } from "react-redux";

@@ -58,6 +58,8 @@ export default (
         ...state,
         tapBpm: { ...state.tapBpm, ...payload },
       };
+    case "RESET":
+      return initialState;
     default:
       return state;
   }
