@@ -27,56 +27,87 @@ class MainWindow extends BrowserWindow {
   createMainMenu = () => {
     const mainMenuTemplate = [
       {
+        label: app.name,
+        submenu: [
+          {
+            label: "Reset App",
+            accelerator: "Shift+Escape",
+            click: () => this.webContents.send("app:reset"),
+          },
+          {
+            label: "Main Screen",
+            accelerator: "Escape",
+            click: () => this.webContents.send("app:main-screen"),
+          },
+          {
+            label: "App Shortcuts",
+            accelerator: "Shift+S",
+            click: () => this.webContents.send("app:toggle-shortcuts-list"),
+          },
+        ],
+      },
+      {
         label: "Controls",
         submenu: [
           {
             label: "Start/Stop",
             accelerator: "space",
-            click: () => {
-              this.webContents.send("beats:start-stop");
-            },
-          },
-          {
-            label: "Faster +10",
-            accelerator: "numadd",
-            click: () => {
-              this.webContents.send("beats:change-speed", 10);
-            },
-          },
-          {
-            label: "Slower -10",
-            accelerator: "numsub",
-            click: () => {
-              this.webContents.send("beats:change-speed", -10);
-            },
-          },
-          {
-            label: "Faster +1",
-            accelerator: "Control+numadd",
-            click: () => {
-              this.webContents.send("beats:change-speed", 1);
-            },
-          },
-          {
-            label: "Slower -1",
-            accelerator: "Control+numsub",
-            click: () => {
-              this.webContents.send("beats:change-speed", -1);
-            },
+            click: () => this.webContents.send("beats:start-stop"),
           },
           {
             label: "Toggle Focus Mode",
             accelerator: "F",
-            click: () => {
-              this.webContents.send("app:toggle-focus", "");
-            },
+            click: () => this.webContents.send("app:toggle-focus", ""),
           },
           {
             label: "Tap BPM",
             accelerator: "T",
-            click: () => {
-              this.webContents.send("beats:tap-bpm", "");
-            },
+            click: () => this.webContents.send("beats:tap-bpm", ""),
+          },
+          {
+            label: "Change Sound Preset",
+            accelerator: "S",
+            click: () => this.webContents.send("app:change-sound-preset"),
+          },
+        ],
+      },
+      {
+        label: "BPM",
+        submenu: [
+          {
+            label: "Faster +10",
+            accelerator: "numadd",
+            click: () => this.webContents.send("beats:change-speed", 10),
+          },
+          {
+            label: "Slower -10",
+            accelerator: "numsub",
+            click: () => this.webContents.send("beats:change-speed", -10),
+          },
+          {
+            label: "Faster +1",
+            accelerator: "Control+numadd",
+            click: () => this.webContents.send("beats:change-speed", 1),
+          },
+          {
+            label: "Slower -1",
+            accelerator: "Control+numsub",
+            click: () => this.webContents.send("beats:change-speed", -1),
+          },
+        ],
+      },
+      {
+        label: "Beats",
+        submenu: [
+          {
+            label: "Add Beat",
+            accelerator: "B",
+            click: () => this.webContents.send("beats:add"),
+          },
+          {
+            label: "Remove Beat",
+            accelerator: "Control+B",
+            click: () => this.webContents.send("beats:remove"),
           },
         ],
       },
@@ -91,17 +122,18 @@ class MainWindow extends BrowserWindow {
       },
     ];
 
-    const appNamedMenu = {
-      label: app.name,
-      submenu: [
-        {
-          label: "Reset App",
-          click: () => {
-            this.webContents.send("app:reset");
-          },
-        },
-      ],
-    };
+    // creating an object with all menu items, for frontend to show in the app
+    this.shortcuts = mainMenuTemplate
+      .slice(0, mainMenuTemplate.length - 2)
+      .map((menu) => ({
+        title: menu.label,
+        shortcuts: [
+          ...menu.submenu.map((sh) => ({
+            label: sh.label ? sh.label : sh.role ? sh.role : undefined,
+            mapping: sh.accelerator ? sh.accelerator : undefined,
+          })),
+        ],
+      }));
 
     if (isDev) {
       mainMenuTemplate.push({
@@ -119,14 +151,19 @@ class MainWindow extends BrowserWindow {
       });
     }
 
-    const mainMenu = Menu.buildFromTemplate([
-      appNamedMenu,
-      ...mainMenuTemplate,
-    ]);
+    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
     Menu.setApplicationMenu(mainMenu);
   };
 
   ipcInit = () => {
+    ipcMain.on("app:req-shortcuts-list", async () => {
+      try {
+        this.webContents.send("app:res-shortcuts-list", this.shortcuts);
+      } catch (error) {
+        console.log(error.message);
+      }
+    });
+
     ipcMain.on("reload", () => {
       this.reload();
     });

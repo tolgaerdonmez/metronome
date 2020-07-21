@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect } from "react";
 import "../../sass/Metronome/BeatSelector.scss";
 
 import UIButton from "../UIButton";
@@ -8,6 +8,7 @@ import { ReactComponent as PlusIcon } from "../../icons/plus.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { ReduxState } from "../../types/redux";
 import { setBeats, setNotes } from "../../store/actions/metronome";
+import { withSound } from "../../utils/sounds";
 
 function BeatSelector(): ReactElement {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function BeatSelector(): ReactElement {
     ...state.metronome,
   }));
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const changeBeats = (value: number) => {
     const b = beats + value;
     dispatch(setBeats(b <= 0 ? 1 : b > 16 ? 16 : b));
@@ -24,6 +26,19 @@ function BeatSelector(): ReactElement {
     const n = notes + value;
     dispatch(setNotes(n <= 0 ? 0 : n > 5 ? 5 : n));
   };
+
+  useEffect(() => {
+    const addBeat = withSound(() => changeBeats(1));
+    const removeBeat = withSound(() => changeBeats(-1));
+
+    window.ipcRenderer.on("beats:add", addBeat);
+    window.ipcRenderer.on("beats:remove", removeBeat);
+
+    return () => {
+      window.ipcRenderer.off("beats:add", addBeat);
+      window.ipcRenderer.off("beats:remove", removeBeat);
+    };
+  }, [changeBeats]);
 
   return (
     <div className="beat-selector-container metronome-child-container">

@@ -1,0 +1,56 @@
+@import "colors";
+
+.shortcuts-container * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.shortcuts-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 1em;
+  row-gap: 1em;
+  font-size: 120%;
+  & > div {
+    display: flex;
+    flex-direction: column;
+
+    padding: 1em;
+
+    background-color: $dark-gray;
+    border-radius: 20px;
+
+    .title {
+      font-size: 1.3em;
+      margin-bottom: 0.5em;
+    }
+    ul {
+      li {
+        display: flex;
+        align-items: center;
+
+        margin: 0.2em;
+
+        .label {
+          flex: 1;
+          font-weight: bold;
+        }
+        .mapping {
+          font-style: italic;
+          font-size: 0.85em;
+        }
+      }
+    }
+  }
+
+  p {
+    color: $text;
+  }
+  ul {
+    list-style-type: none;
+    li {
+      color: $text;
+    }
+  }
+}

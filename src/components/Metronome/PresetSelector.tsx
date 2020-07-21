@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect } from "react";
 import "../../sass/Metronome/PresetSelector.scss";
 
 import UIButton from "../UIButton";
@@ -16,11 +16,20 @@ function PresetSelector(): ReactElement {
     ...state.metronome,
   }));
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const changePreset = (direction: number) => {
     const p = preset + direction;
     dispatch(setPreset(p <= 0 ? 1 : p));
     if (!playing) beats.second.play();
   };
+
+  useEffect(() => {
+    const listener = () => changePreset(1);
+    window.ipcRenderer.on("app:change-sound-preset", listener);
+    return () => {
+      window.ipcRenderer.off("app:change-sound-preset", listener);
+    };
+  }, [changePreset]);
 
   return (
     <div className="preset-selector-container metronome-child-container">

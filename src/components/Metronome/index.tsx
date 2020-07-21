@@ -25,7 +25,7 @@ import UIButton from "../UIButton";
 import { ReactComponent as LeftArrowIcon } from "../../icons/arrowLeft.svg";
 import TapBpmScreen from "./TapBpmScreen";
 import { toggleTapBpmFocus } from "../../store/actions/metronome";
-import { buttonClick } from "../../utils/sounds";
+import { withSound } from "../../utils/sounds";
 
 function Metronome(): ReactElement {
   const dispatch = useDispatch();
@@ -37,9 +37,9 @@ function Metronome(): ReactElement {
   );
 
   useEffect(() => {
-    const toggle = () => {
+    const toggle = withSound(() => {
       dispatch(toggleFocusMode());
-    };
+    });
     window.ipcRenderer.on("app:toggle-focus", toggle);
 
     return () => {
@@ -52,10 +52,9 @@ function Metronome(): ReactElement {
       if (playing) dispatch(stopBeats());
       else dispatch(startBeats());
     };
-    const changeSpeed = (_: any, v: any) => {
+    const changeSpeed = withSound((_: any, v: any) => {
       dispatch(setBpm(bpm + v));
-      buttonClick.play();
-    };
+    });
 
     window.ipcRenderer.on("beats:start-stop", toggle);
     window.ipcRenderer.on("beats:change-speed", changeSpeed);
@@ -67,14 +66,15 @@ function Metronome(): ReactElement {
   }, [dispatch, playing, bpm]);
 
   useEffect(() => {
-    const tap = () => {
+    const tap = withSound(() => {
       if (tapBpm.focusMode) {
         if (playing) dispatch(stopBeats());
         if (tapBpm.startTime) dispatch(incrementTapCount());
         else dispatch(startTapBpm());
-        buttonClick.play();
+      } else {
+        dispatch(toggleTapBpmFocus());
       }
-    };
+    });
 
     window.ipcRenderer.once("beats:tap-bpm", tap);
 

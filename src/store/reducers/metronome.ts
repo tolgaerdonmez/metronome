@@ -58,6 +58,8 @@ export default (
         ...state,
         tapBpm: { ...state.tapBpm, ...payload },
       };
+    case "MAIN_MENU":
+      return { ...state, tapBpm: initialState.tapBpm };
     case "RESET":
       return initialState;
     default:

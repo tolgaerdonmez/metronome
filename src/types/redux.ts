@@ -16,8 +16,15 @@ export interface MetronomeReducerState {
   tapBpm: TapBpm;
 }
 
+export type AppShortcut = {
+  title: string;
+  shortcuts: { label: string; mapping: string }[];
+};
+
 export interface AppReducerState {
   focusMode: boolean;
+  shortcuts: AppShortcut[];
+  showShortcuts: boolean;
 }
 
 export interface ReduxState {
