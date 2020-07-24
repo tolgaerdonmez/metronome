@@ -20,7 +20,7 @@ export const buttonClick = new Howl({
 
 export const withSound: (...args: any[]) => any = (
   func: (...args: any[]) => any
-) => () => {
+) => (...args: any[]) => {
   buttonClick.play();
-  func();
+  func(...args);
 };

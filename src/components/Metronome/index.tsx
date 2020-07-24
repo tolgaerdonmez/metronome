@@ -50,7 +50,7 @@ function Metronome(): ReactElement {
   useEffect(() => {
     const toggle = (_: any, v: any) => {
       if (playing) dispatch(stopBeats());
-      else dispatch(startBeats());
+      else if (!tapBpm.focusMode) dispatch(startBeats());
     };
     const changeSpeed = withSound((_: any, v: any) => {
       dispatch(setBpm(bpm + v));
@@ -63,7 +63,7 @@ function Metronome(): ReactElement {
       window.ipcRenderer.off("beats:start-stop", toggle);
       window.ipcRenderer.off("beats:change-speed", changeSpeed);
     };
-  }, [dispatch, playing, bpm]);
+  }, [dispatch, playing, bpm, tapBpm]);
 
   useEffect(() => {
     const tap = withSound(() => {

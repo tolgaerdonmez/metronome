@@ -1,6 +1,6 @@
 # App Store Showcase Screenshots Lines
 
-## The simplest and powerfull metronome to power your music, practice, studio records
+## The simplest and yet powerful metronome for your music, practice & studio records
 
 ## A simple user interface for you to easily jump in
 

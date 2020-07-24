@@ -124,7 +124,7 @@ class MainWindow extends BrowserWindow {
 
     // creating an object with all menu items, for frontend to show in the app
     this.shortcuts = mainMenuTemplate
-      .slice(0, mainMenuTemplate.length - 2)
+      .slice(0, mainMenuTemplate.length - 1)
       .map((menu) => ({
         title: menu.label,
         shortcuts: [

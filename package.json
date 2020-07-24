@@ -1,7 +1,7 @@
 {
   "name": "metronome",
-  "productName": "Metronome",
-  "version": "0.1.0",
+  "productName": "Focus Metronome",
+  "version": "1.0.0",
   "private": true,
   "main": "electron/main.js",
   "homepage": "./",
@@ -51,22 +51,42 @@
     "eject": "react-scripts eject",
     "dev": "ELECTRON_IS_DEV=1 concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && yarn dev:electron\"",
     "dev:electron": "ELECTRON_IS_DEV=1 electron .",
-    "package-mac": "electron-builder build --mac -c.extraMetadata.main=build/electron/main.js",
+    "package-mac": "CSC_LINK=./build/all-certs.p12 electron-builder build --mac -c.extraMetadata.main=build/electron/main.js && bash build/resignAndPackage.sh",
     "package-linux": "electron-builder build --linux appImage -c.extraMetadata.main=build/electron/main.js",
     "package-win": "electron-builder build --win portable -c.extraMetadata.main=build/electron/main.js",
-    "prepackage": "yarn build && cp -r electron build/",
+    "prepackage": "yarn build && cp -r electron build/ && cp -r macOS/* build/",
     "prepackage-linux": "yarn prepackage",
     "prepackage-mac": "yarn prepackage",
     "prepackage-win": "yarn prepackage"
   },
   "build": {
     "appId": "com.tolgaerdonmez.metronome",
+    "buildVersion": "2",
     "files": [
       "build/**/*",
-      "node_modules/**/*"
+      "node_modules/**/*",
+      "embedded.provisionprofile"
     ],
     "directories": {
       "buildResources": "assets"
+    },
+    "mac": {
+      "category": "public.app-category.music",
+      "target": [
+        "mas",
+        "mas-dev"
+      ],
+      "provisioningProfile": "./embedded.provisionprofile",
+      "icon": "assets/Icon.icns"
+    },
+    "mas": {
+      "provisioningProfile": "./embedded.provisionprofile",
+      "entitlements": "build/entitlements.mas.plist",
+      "entitlementsInherit": "build/entitlements.mas.inherit.plist",
+      "icon": "assets/Icon.icns",
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
+      "asarUnpack": []
     }
   },
   "eslintConfig": {

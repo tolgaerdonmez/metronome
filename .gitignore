@@ -148,6 +148,9 @@ yarn-debug.log*
 yarn-error.log*
 yarn.lock
 
+macOS
+*.p12
+*.provisionprofile
 ### for a while
 assets/example
 *.old.*
