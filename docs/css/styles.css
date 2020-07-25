@@ -1,0 +1,126 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: Montserrat;
+  font-weight: 400;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+h1 {
+  font-size: 6rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+body {
+  width: 60%;
+  margin: 5rem auto;
+  background-color: #fd9b0f;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+img {
+  height: 60rem;
+}
+
+.hero {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.hero #logo {
+  height: 20rem;
+}
+
+.hero h1,
+.hero h2 {
+  text-align: center;
+}
+
+.hero h1 {
+  margin-bottom: 0.4rem;
+}
+
+.hero h2 {
+  padding: 0 15rem;
+}
+
+.hero h3 {
+  margin: 0.8rem 0;
+}
+
+.features > div, .features {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.features h2 {
+  font-size: 6rem;
+  margin: 0.8rem 0 3.5rem 0;
+}
+
+.features p {
+  font-size: 3.4rem;
+}
+
+.features #sound-preset {
+  height: 30rem;
+  margin: 2rem 0;
+}
+
+.features #oss p {
+  text-align: center;
+}
+
+.features #oss p:last-child {
+  margin: 3rem 0;
+}
+/*# sourceMappingURL=styles.css.map */
