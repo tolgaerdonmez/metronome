@@ -5,6 +5,8 @@
 
 ## Metronome App with React TypeScript & Electron
 
+### 🏠 [Visit Homepage](https://tolgaerdonmez.github.io/metronome/)
+
 ## Install
 
 ```sh
