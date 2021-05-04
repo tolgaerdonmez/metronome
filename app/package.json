@@ -8,7 +8,6 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@types/node": "^15.0.1",
     "howler": "^2.2.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
@@ -21,6 +20,7 @@
   "devDependencies": {
     "@types/electron": "^1.6.10",
     "@types/howler": "^2.2.1",
+    "@types/node": "^15.0.1",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-redux": "^7.1.9",

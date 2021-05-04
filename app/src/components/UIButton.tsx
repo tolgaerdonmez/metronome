@@ -8,9 +8,10 @@ import React, {
 import { buttonClick } from "../utils/sounds";
 import { useSelector } from "react-redux";
 import { ReduxState } from "../types/redux";
+import { ISvgProps } from "./icons";
 
 interface RootProps {
-  icon?: FunctionComponent<SVGProps<SVGSVGElement>>;
+  icon?: FunctionComponent<ISvgProps>;
   audio?: boolean;
 }
 
@@ -19,13 +20,14 @@ type ButtonProps = DetailedHTMLProps<
   HTMLButtonElement
 >;
 
-type Props = RootProps & (ButtonProps | SVGProps<SVGSVGElement>);
+type Props = RootProps & (ButtonProps | ISvgProps) & { size?: number };
 
 function UIButton({
   onClick,
   className,
   icon,
   audio,
+  size = 24,
   ...props
 }: Props): ReactElement {
   const { playing } = useSelector((state: ReduxState) => ({
@@ -46,7 +48,8 @@ function UIButton({
       <Icon
         onClick={_onClick}
         className={_className + " icon-button"}
-        {...(props as SVGProps<SVGSVGElement>)}
+        size={size}
+        {...(props as ISvgProps)}
       />
     );
   }

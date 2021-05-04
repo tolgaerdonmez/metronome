@@ -1,6 +1,7 @@
 import * as React from "react";
+import { ISvgProps } from ".";
 
-function SvgPower(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+function SvgPower(props: ISvgProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
