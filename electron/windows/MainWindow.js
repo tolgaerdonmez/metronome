@@ -14,7 +14,7 @@ class MainWindow extends BrowserWindow {
       isDev
         ? "http://localhost:3000"
         : url.format({
-            pathname: path.join(__dirname, "../../index.html"),
+            pathname: path.join(__dirname, "../index.html"),
             protocol: "file:",
             slashes: true,
           })

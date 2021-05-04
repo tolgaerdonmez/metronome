@@ -149,6 +149,7 @@ yarn-error.log*
 yarn.lock
 
 macOS
+_macOS
 *.p12
 *.provisionprofile
 ### for a while
