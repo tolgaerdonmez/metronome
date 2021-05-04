@@ -152,6 +152,7 @@ macOS
 _macOS
 *.p12
 *.provisionprofile
+dump
 ### for a while
 assets/example
 *.old.*
