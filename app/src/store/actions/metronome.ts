@@ -112,7 +112,7 @@ export const stopBeats = (): ThunkAction<
     metronome: { beatTimeout },
   } = getState();
   if (beatTimeout) {
-    beats.second.playing && beats.second.stop();
+    beats.second.playing() && beats.second.stop();
     dispatch(clearBeatTimeout());
     dispatch(stop());
   }
