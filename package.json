@@ -3,7 +3,7 @@
   "productName": "Focus Metronome",
   "version": "1.0.0",
   "private": true,
-  "main": "electron/main.js",
+  "main": "build/electron.js",
   "homepage": "./",
   "author": {
     "name": "Tolga Erdonmez",
@@ -37,8 +37,8 @@
     "@types/redux-persist": "^4.3.1",
     "asar": "^3.0.3",
     "concurrently": "^5.2.0",
-    "electron": "^8.2.5",
-    "electron-builder": "^22.6.0",
+    "electron": "^9.1.1",
+    "electron-builder": "^22.7.0",
     "electron-packager": "^14.2.1",
     "electron-reload": "^1.5.0",
     "npm-run-all": "^4.1.5",
@@ -51,17 +51,17 @@
     "eject": "react-scripts eject",
     "dev": "ELECTRON_IS_DEV=1 concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && yarn dev:electron\"",
     "dev:electron": "ELECTRON_IS_DEV=1 electron .",
-    "package-mac": "CSC_LINK=./build/all-certs.p12 electron-builder build --mac -c.extraMetadata.main=build/electron/main.js && bash build/resignAndPackage.sh",
+    "package-mac": "CSC_LINK=./build/all-certs.p12 electron-builder build --mac && bash build/resignAndPackage.sh",
     "package-linux": "electron-builder build --linux appImage -c.extraMetadata.main=build/electron/main.js",
     "package-win": "electron-builder build --win portable -c.extraMetadata.main=build/electron/main.js",
-    "prepackage": "yarn build && cp -r electron build/ && cp -r macOS/* build/",
+    "prepackage": "yarn build && cp -r electron/* build/ && cp -r macOS/* build/",
     "prepackage-linux": "yarn prepackage",
     "prepackage-mac": "yarn prepackage",
     "prepackage-win": "yarn prepackage"
   },
   "build": {
     "appId": "com.tolgaerdonmez.metronome",
-    "buildVersion": "2",
+    "buildVersion": "3",
     "files": [
       "build/**/*",
       "node_modules/**/*",
@@ -73,8 +73,7 @@
     "mac": {
       "category": "public.app-category.music",
       "target": [
-        "mas",
-        "mas-dev"
+        "mas"
       ],
       "provisioningProfile": "./embedded.provisionprofile",
       "icon": "assets/Icon.icns"
