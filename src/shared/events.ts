@@ -21,7 +21,7 @@
  *
  *  */
 
-import { AppShortcut } from "../../app/src/types/redux";
+import { AppShortcut } from "../app/src/types/redux";
 import { createEvent } from "./EEvent";
 
 export const events = {

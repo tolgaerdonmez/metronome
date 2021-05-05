@@ -1,7 +1,7 @@
-import { ipcRenderer } from "electron";
+import { events } from "../../shared/events";
 
 declare global {
   interface Window {
-    electron: { ipcRenderer: typeof ipcRenderer };
+    eevents: typeof events;
   }
 }

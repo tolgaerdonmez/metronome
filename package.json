@@ -26,6 +26,7 @@
   },
   "scripts": {
     "build:app": "yarn --cwd src/app build",
+    "build:shared": "yarn tsc -p src/shared/tsconfig.json",
     "dev:app": "yarn --cwd src/app dev",
     "dev": "ELECTRON_IS_DEV=1 concurrently 'yarn dev:app' 'yarn dev:electron'",
     "dev:electron": "ELECTRON_IS_DEV=1 electron src/electron/index.js",
