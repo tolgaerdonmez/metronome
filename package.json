@@ -3,7 +3,7 @@
   "productName": "Focus Metronome",
   "version": "1.0.0",
   "private": true,
-  "main": "build/electron.js",
+  "main": "build/index.js",
   "homepage": "./",
   "author": {
     "name": "Tolga Erdonmez",
@@ -18,18 +18,20 @@
     "concurrently": "^5.2.0",
     "electron": "^12.0.5",
     "electron-builder": "^22.10.5",
+    "electron-packager": "^14.2.1",
     "electron-reload": "^1.5.0",
     "npm-run-all": "^4.1.5",
+    "typescript": "^4.2.4",
     "wait-on": "^4.0.2"
   },
   "scripts": {
-    "build:app": "yarn --cwd app build",
-    "dev:app": "yarn --cwd app dev",
+    "build:app": "yarn --cwd src/app build",
+    "dev:app": "yarn --cwd src/app dev",
     "dev": "ELECTRON_IS_DEV=1 concurrently 'yarn dev:app' 'yarn dev:electron'",
-    "dev:electron": "ELECTRON_IS_DEV=1 electron .",
+    "dev:electron": "ELECTRON_IS_DEV=1 electron src/electron/index.js",
     "package-mac": "CSC_LINK=./build/all-certs.p12 electron-builder build --mac && bash build/resignAndPackage.sh",
-    "package-linux": "electron-builder build --linux appImage -c.extraMetadata.main=build/electron/main.js",
-    "package-win": "electron-builder build --win portable -c.extraMetadata.main=build/electron/main.js",
+    "package-linux": "electron-builder build --linux appImage -c.extraMetadata.main=build/index.js",
+    "package-win": "electron-builder build --win portable -c.extraMetadata.main=build/index.js",
     "prepackage": "yarn build:app && cp -r electron/* build/ && cp -r macOS/* build/",
     "prepackage-linux": "yarn prepackage",
     "prepackage-mac": "yarn prepackage",
@@ -38,12 +40,12 @@
   "build": {
     "appId": "com.tolgaerdonmez.metronome",
     "buildVersion": "3",
-    "files": [
-      "build/**/*",
-      "node_modules/**/*",
-      "embedded.provisionprofile"
-    ],
     "directories": {
+      "files": [
+        "build/**/*",
+        "node_modules/**/*",
+        "embedded.provisionprofile"
+      ],
       "buildResources": "assets"
     },
     "mac": {
