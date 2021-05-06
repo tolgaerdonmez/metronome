@@ -1,14 +1,17 @@
 export function mockElectron() {
   const emptyMock = (e: any, ...args: any[]) => {
-    console.log(args);
+    console.log("IPC RENDERER CALLED");
     return {} as any;
   };
 
-  if (!window.electron.ipcRenderer) {
-    window.electron.ipcRenderer = {
+  if (!window.eevents) {
+    window.eevents = {} as any;
+  }
+  window.electron = {
+    ipcRenderer: {
       on: emptyMock,
       off: emptyMock,
       once: emptyMock,
-    } as any;
-  }
+    } as any,
+  };
 }

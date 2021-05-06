@@ -8,6 +8,9 @@ import { ReduxState } from "../../types/redux";
 import { setPreset, beats } from "../../store/actions/metronome";
 
 import { ArrowRight, ArrowLeft } from "../icons";
+import { useEEventOnOff } from "../../hooks";
+
+const { eevents } = window;
 
 function PresetSelector(): ReactElement {
   const dispatch = useDispatch();
@@ -22,13 +25,9 @@ function PresetSelector(): ReactElement {
     if (!playing) beats.second.play();
   };
 
-  useEffect(() => {
-    const listener = () => changePreset(1);
-    window.electron.ipcRenderer.on("app:change-sound-preset", listener);
-    return () => {
-      window.electron.ipcRenderer.off("app:change-sound-preset", listener);
-    };
-  }, [changePreset]);
+  useEEventOnOff<null>(eevents.changeSoundPreset, () => changePreset(1), [
+    changePreset,
+  ]);
 
   return (
     <div className="preset-selector-container metronome-child-container">

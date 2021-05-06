@@ -26,14 +26,15 @@
   },
   "scripts": {
     "build:app": "yarn --cwd src/app build",
-    "build:shared": "yarn tsc -p src/shared/tsconfig.json",
+    "build:shared": "yarn tsc -p ./tsconfig.shared.json",
     "dev:app": "yarn --cwd src/app dev",
     "dev": "ELECTRON_IS_DEV=1 concurrently 'yarn dev:app' 'yarn dev:electron'",
+    "predev": "yarn build:shared",
     "dev:electron": "ELECTRON_IS_DEV=1 electron src/electron/index.js",
     "package-mac": "CSC_LINK=./build/all-certs.p12 electron-builder build --mac && bash build/resignAndPackage.sh",
     "package-linux": "electron-builder build --linux appImage -c.extraMetadata.main=build/index.js",
     "package-win": "electron-builder build --win portable -c.extraMetadata.main=build/index.js",
-    "prepackage": "yarn build:app && cp -r electron/* build/ && cp -r macOS/* build/",
+    "prepackage": "yarn build:shared && yarn build:app && cp -r electron/* build/ && cp -r macOS/* build/",
     "prepackage-linux": "yarn prepackage",
     "prepackage-mac": "yarn prepackage",
     "prepackage-win": "yarn prepackage"

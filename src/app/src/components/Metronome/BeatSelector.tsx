@@ -9,6 +9,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { ReduxState } from "../../types/redux";
 import { setBeats, setNotes } from "../../store/actions/metronome";
 import { withSound } from "../../utils/sounds";
+import { useEEventOnOff } from "../../hooks";
+
+const { eevents } = window;
 
 function BeatSelector(): ReactElement {
   const dispatch = useDispatch();
@@ -27,18 +30,17 @@ function BeatSelector(): ReactElement {
     dispatch(setNotes(n <= 0 ? 0 : n > 5 ? 5 : n));
   };
 
-  useEffect(() => {
-    const addBeat = withSound(() => changeBeats(1));
-    const removeBeat = withSound(() => changeBeats(-1));
+  useEEventOnOff(
+    eevents.incrementBeatCount,
+    withSound(() => changeBeats(1)),
+    [changeBeats]
+  );
 
-    window.electron.ipcRenderer.on("beats:add", addBeat);
-    window.electron.ipcRenderer.on("beats:remove", removeBeat);
-
-    return () => {
-      window.electron.ipcRenderer.off("beats:add", addBeat);
-      window.electron.ipcRenderer.off("beats:remove", removeBeat);
-    };
-  }, [changeBeats]);
+  useEEventOnOff(
+    eevents.decrementBeatCount,
+    withSound(() => changeBeats(-1)),
+    [changeBeats]
+  );
 
   return (
     <div className="beat-selector-container metronome-child-container">

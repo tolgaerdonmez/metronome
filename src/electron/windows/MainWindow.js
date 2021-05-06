@@ -156,7 +156,7 @@ class MainWindow extends BrowserWindow {
   };
 
   ipcInit = () => {
-    ipcMain.on("app:req-shortcuts-list", async () => {
+    ipcMain.on("app:req-shortcuts-list", () => {
       try {
         this.webContents.send("app:res-shortcuts-list", this.shortcuts);
       } catch (error) {

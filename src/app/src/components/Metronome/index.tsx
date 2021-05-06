@@ -26,6 +26,9 @@ import { ArrowLeft } from "../icons";
 import TapBpmScreen from "./TapBpmScreen";
 import { toggleTapBpmFocus } from "../../store/actions/metronome";
 import { withSound } from "../../utils/sounds";
+import { useEEventOnOff } from "../../hooks";
+
+const { eevents } = window;
 
 function Metronome(): ReactElement {
   const dispatch = useDispatch();
@@ -36,37 +39,34 @@ function Metronome(): ReactElement {
     })
   );
 
-  useEffect(() => {
-    const toggle = withSound(() => {
+  useEEventOnOff(
+    eevents.toggleToFocusScreen,
+    withSound(() => {
       dispatch(toggleFocusMode());
-    });
-    window.electron.ipcRenderer.on("app:toggle-focus", toggle);
+    }),
+    [dispatch]
+  );
 
-    return () => {
-      window.electron.ipcRenderer.off("app:toggle-focus", toggle);
-    };
-  }, [dispatch]);
-
-  useEffect(() => {
-    const toggle = (_: any, v: any) => {
+  useEEventOnOff(
+    eevents.startStopBeats,
+    (_, __) => {
       if (playing) dispatch(stopBeats());
       else if (!tapBpm.focusMode) dispatch(startBeats());
-    };
-    const changeSpeed = withSound((_: any, v: any) => {
+    },
+    [dispatch, playing, tapBpm.focusMode]
+  );
+
+  useEEventOnOff(
+    eevents.changeBpm,
+    withSound((_: any, v: number) => {
       dispatch(setBpm(bpm + v));
-    });
+    }),
+    [dispatch, bpm]
+  );
 
-    window.electron.ipcRenderer.on("beats:start-stop", toggle);
-    window.electron.ipcRenderer.on("beats:change-speed", changeSpeed);
-
-    return () => {
-      window.electron.ipcRenderer.off("beats:start-stop", toggle);
-      window.electron.ipcRenderer.off("beats:change-speed", changeSpeed);
-    };
-  }, [dispatch, playing, bpm, tapBpm]);
-
-  useEffect(() => {
-    const tap = withSound(() => {
+  useEEventOnOff(
+    eevents.tapBpm,
+    withSound(() => {
       if (tapBpm.focusMode) {
         if (playing) dispatch(stopBeats());
         if (tapBpm.startTime) dispatch(incrementTapCount());
@@ -74,14 +74,9 @@ function Metronome(): ReactElement {
       } else {
         dispatch(toggleTapBpmFocus());
       }
-    });
-
-    window.electron.ipcRenderer.once("beats:tap-bpm", tap);
-
-    return () => {
-      window.electron.ipcRenderer.off("beats:tap-bpm", tap);
-    };
-  }, [dispatch, tapBpm.count, tapBpm.startTime, tapBpm.focusMode, playing]);
+    }),
+    [dispatch, tapBpm.count, tapBpm.startTime, tapBpm.focusMode, playing]
+  );
 
   let Render: ReactElement;
 

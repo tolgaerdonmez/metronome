@@ -1,4 +1,4 @@
 const { contextBridge } = require("electron");
-const { events } = require("../shared/dist/shared/events.js");
+const { createEvents } = require("../lib/shared/events");
 
-contextBridge.exposeInMainWorld("eevents", events);
+contextBridge.exposeInMainWorld("eevents", createEvents(true));

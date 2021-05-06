@@ -8,52 +8,43 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadShortcuts, toggleShortcuts } from "./store/actions/app";
 import { AppShortcut, ReduxState } from "./types/redux";
 import { withSound } from "./utils/sounds";
+import { useEEventOnOff } from "./hooks";
+
+const { eevents } = window;
 
 function App() {
   const dispatch = useDispatch();
   const showShortcuts = useSelector(({ app }: ReduxState) => app.showShortcuts);
 
-  // useEffect(() => {
-  //   window.electron.ipcRenderer.send("app:req-shortcuts-list");
-  // }, []);
+  useEffect(() => {
+    eevents.requestShortcutsList.send({});
+  }, []);
 
-  // useEffect(() => {
-  //   const listener = (event: any, shortcuts: AppShortcut[]) => {
-  //     dispatch(loadShortcuts(shortcuts));
-  //   };
-  //   window.electron.ipcRenderer.on("app:res-shortcuts-list", listener);
-  //   return () => {
-  //     window.electron.ipcRenderer.off("app:res-shortcuts-list", listener);
-  //   };
-  // }, [dispatch]);
+  useEEventOnOff(
+    eevents.receiveShortcutsList,
+    (_: any, shortcuts: AppShortcut[]) => {
+      dispatch(loadShortcuts(shortcuts));
+    },
+    [dispatch]
+  );
 
-  // useEffect(() => {
-  //   const resetHandler = withSound(() =>
-  //     dispatch({ type: "RESET", payload: undefined })
-  //   );
-  //   window.electron.ipcRenderer.on("app:reset", resetHandler);
-  //   return () => {
-  //     window.electron.ipcRenderer.off("app:reset", resetHandler);
-  //   };
-  // }, [dispatch]);
+  useEEventOnOff(
+    eevents.resetApp,
+    withSound(() => dispatch({ type: "RESET", payload: undefined })),
+    [dispatch]
+  );
 
-  // useEffect(() => {
-  //   const listener = withSound(() => dispatch(toggleShortcuts()));
-  //   window.electron.ipcRenderer.on("app:toggle-shortcuts-list", listener);
-  //   return () => {
-  //     window.electron.ipcRenderer.off("app:toggle-shortcuts-list", listener);
-  //   };
-  // }, [dispatch]);
+  useEEventOnOff(
+    eevents.toggleShortcutsPage,
+    withSound(() => dispatch(toggleShortcuts())),
+    [dispatch]
+  );
 
-  // useEffect(() => {
-  //   const listener = withSound(() =>
-  //     dispatch({ type: "MAIN_MENU", payload: undefined })
-  //   );
-  //   window.electron.ipcRenderer.on("app:main-screen", listener);
-  //   return () => {
-  //     window.electron.ipcRenderer.off("app:main-screen", listener);
-  //   };
-  // }, [dispatch]);
+  useEEventOnOff(
+    eevents.changeToMainScreen,
+    withSound(() => dispatch({ type: "MAIN_MENU", payload: undefined })),
+    [dispatch]
+  );
 
   if (showShortcuts) return <Shortcuts />;
   else return <Metronome />;

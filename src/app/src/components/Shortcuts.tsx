@@ -19,7 +19,7 @@ function Shortcuts(): ReactElement {
     <div className="shortcuts-container">
       {shortcuts
         ? shortcuts.map(({ title, shortcuts }) => (
-            <div>
+            <div key={title + shortcuts.length.toString()}>
               <p className="title">{title}</p>
               <ul>
                 {shortcuts.map(({ label, mapping }) => (

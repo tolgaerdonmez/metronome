@@ -157,3 +157,5 @@ dump
 assets/example
 *.old.*
 sound_old
+
+src/lib

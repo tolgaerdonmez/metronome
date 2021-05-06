@@ -43,7 +43,6 @@ function UIButton({
 
   if (icon) {
     const Icon = icon;
-    console.log(props);
     return (
       <Icon
         onClick={_onClick}
