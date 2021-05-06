@@ -17,7 +17,7 @@ class MainWindow extends BrowserWindow {
       isDev
         ? "http://localhost:3000"
         : url.format({
-            pathname: path.join(__dirname, "../index.html"),
+            pathname: path.join(__dirname, "../../index.html"),
             protocol: "file:",
             slashes: true,
           })
@@ -143,21 +143,21 @@ class MainWindow extends BrowserWindow {
         ],
       }));
 
-    if (isDev) {
-      mainMenuTemplate.push({
-        label: "Developer Tools",
-        submenu: [
-          {
-            label: "Toggle DevTools",
-            click(item, focusedWindow) {
-              focusedWindow.toggleDevTools();
-            },
-            accelerator: process.platform === "darwin" ? "Command+I" : "Ctrl+I",
+    // if (isDev) {
+    mainMenuTemplate.push({
+      label: "Developer Tools",
+      submenu: [
+        {
+          label: "Toggle DevTools",
+          click(item, focusedWindow) {
+            focusedWindow.toggleDevTools();
           },
-          { role: "reload" },
-        ],
-      });
-    }
+          accelerator: process.platform === "darwin" ? "Command+I" : "Ctrl+I",
+        },
+        { role: "reload" },
+      ],
+    });
+    // }
 
     const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
     Menu.setApplicationMenu(mainMenu);

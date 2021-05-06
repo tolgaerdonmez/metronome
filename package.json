@@ -3,7 +3,7 @@
   "productName": "Focus Metronome",
   "version": "1.0.0",
   "private": true,
-  "main": "build/index.js",
+  "main": "build/electron/index.js",
   "homepage": "./",
   "author": {
     "name": "Tolga Erdonmez",
@@ -32,23 +32,24 @@
     "predev": "yarn build:shared",
     "dev:electron": "ELECTRON_IS_DEV=1 electron src/electron/index.js",
     "package-mac": "CSC_LINK=./build/all-certs.p12 electron-builder build --mac && bash build/resignAndPackage.sh",
-    "package-linux": "electron-builder build --linux appImage -c.extraMetadata.main=build/index.js",
-    "package-win": "electron-builder build --win portable -c.extraMetadata.main=build/index.js",
-    "prepackage": "yarn build:shared && yarn build:app && cp -r electron/* build/ && cp -r macOS/* build/",
+    "package-linux": "electron-builder build --linux appImage -c.extraMetadata.main=build/electron/index.js",
+    "package-win": "electron-builder build --win portable -c.extraMetadata.main=build/electron/index.js",
+    "prepackage": "yarn build:shared && yarn build:app && cp -r src/electron build/ && cp -r src/lib build/ && cp -r macOS/* build/",
     "prepackage-linux": "yarn prepackage",
     "prepackage-mac": "yarn prepackage",
-    "prepackage-win": "yarn prepackage"
+    "prepackage-win": "yarn prepackage",
+    "clean": "rm -rf build dist"
   },
   "build": {
     "appId": "com.tolgaerdonmez.metronome",
     "buildVersion": "3",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*",
+      "embedded.provisionprofile"
+    ],
     "directories": {
-      "files": [
-        "build/**/*",
-        "node_modules/**/*",
-        "embedded.provisionprofile"
-      ],
-      "buildResources": "assets"
+      "buildResources": "src/assets"
     },
     "mac": {
       "category": "public.app-category.music",
@@ -56,16 +57,15 @@
         "mas"
       ],
       "provisioningProfile": "./embedded.provisionprofile",
-      "icon": "assets/Icon.icns"
+      "icon": "src/assets/Icon.icns"
     },
     "mas": {
       "provisioningProfile": "./embedded.provisionprofile",
       "entitlements": "build/entitlements.mas.plist",
       "entitlementsInherit": "build/entitlements.mas.inherit.plist",
-      "icon": "assets/Icon.icns",
+      "icon": "src/assets/Icon.icns",
       "hardenedRuntime": false,
-      "gatekeeperAssess": false,
-      "asarUnpack": []
+      "gatekeeperAssess": false
     }
   },
   "eslintConfig": {
