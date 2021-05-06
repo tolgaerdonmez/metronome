@@ -9,6 +9,7 @@ import { loadShortcuts, toggleShortcuts } from "./store/actions/app";
 import { AppShortcut, ReduxState } from "./types/redux";
 import { withSound } from "./utils/sounds";
 import { useEEventOnOff } from "./hooks";
+import { setPreset, stopBeats } from "./store/actions/metronome";
 
 const { eevents } = window;
 
@@ -30,7 +31,11 @@ function App() {
 
   useEEventOnOff(
     eevents.resetApp,
-    withSound(() => dispatch({ type: "RESET", payload: undefined })),
+    withSound(() => {
+      dispatch(stopBeats());
+      dispatch(setPreset(1));
+      dispatch({ type: "RESET", payload: undefined });
+    }),
     [dispatch]
   );
 

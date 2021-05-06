@@ -57,10 +57,8 @@ const useIpc = (use: boolean) =>
         off: emptyEmitter,
       };
 
-const createEvent = (w: boolean) => <P = null>(e: string) => {
-  return new EEvent<P>(e, w);
-};
-
-export const createEventFactory = (withIpc: boolean = true) => {
-  return createEvent(withIpc);
+export const createEventFactory = (withIpc: boolean = true) => <P = null>(
+  e: string
+) => {
+  return new EEvent<P>(e, withIpc);
 };

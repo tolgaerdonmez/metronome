@@ -2,6 +2,9 @@ const { app, BrowserWindow, Menu, ipcMain } = require("electron");
 const url = require("url");
 const isDev = require("electron-is-dev");
 const path = require("path");
+const { createEvents } = require("../../lib/shared/events");
+
+const eevents = createEvents(false);
 
 class MainWindow extends BrowserWindow {
   constructor(options) {
@@ -32,17 +35,19 @@ class MainWindow extends BrowserWindow {
           {
             label: "Reset App",
             accelerator: "Shift+Escape",
-            click: () => this.webContents.send("app:reset"),
+            click: () => this.webContents.send(eevents.resetApp.event),
           },
           {
             label: "Main Screen",
             accelerator: "Escape",
-            click: () => this.webContents.send("app:main-screen"),
+            click: () =>
+              this.webContents.send(eevents.changeToMainScreen.event),
           },
           {
             label: "App Shortcuts",
             accelerator: "Shift+S",
-            click: () => this.webContents.send("app:toggle-shortcuts-list"),
+            click: () =>
+              this.webContents.send(eevents.toggleShortcutsPage.event),
           },
         ],
       },
@@ -52,22 +57,23 @@ class MainWindow extends BrowserWindow {
           {
             label: "Start/Stop",
             accelerator: "space",
-            click: () => this.webContents.send("beats:start-stop"),
+            click: () => this.webContents.send(eevents.startStopBeats.event),
           },
           {
             label: "Toggle Focus Mode",
             accelerator: "F",
-            click: () => this.webContents.send("app:toggle-focus", ""),
+            click: () =>
+              this.webContents.send(eevents.toggleToFocusScreen.event, ""),
           },
           {
             label: "Tap BPM",
             accelerator: "T",
-            click: () => this.webContents.send("beats:tap-bpm", ""),
+            click: () => this.webContents.send(eevents.tapBpm.event, ""),
           },
           {
             label: "Change Sound Preset",
             accelerator: "S",
-            click: () => this.webContents.send("app:change-sound-preset"),
+            click: () => this.webContents.send(eevents.changeSoundPreset.event),
           },
         ],
       },
@@ -77,22 +83,22 @@ class MainWindow extends BrowserWindow {
           {
             label: "Faster +10",
             accelerator: "numadd",
-            click: () => this.webContents.send("beats:change-speed", 10),
+            click: () => this.webContents.send(eevents.changeBpm.event, 10),
           },
           {
             label: "Slower -10",
             accelerator: "numsub",
-            click: () => this.webContents.send("beats:change-speed", -10),
+            click: () => this.webContents.send(eevents.changeBpm.event, -10),
           },
           {
             label: "Faster +1",
             accelerator: "Control+numadd",
-            click: () => this.webContents.send("beats:change-speed", 1),
+            click: () => this.webContents.send(eevents.changeBpm.event, 1),
           },
           {
             label: "Slower -1",
             accelerator: "Control+numsub",
-            click: () => this.webContents.send("beats:change-speed", -1),
+            click: () => this.webContents.send(eevents.changeBpm.event, -1),
           },
         ],
       },
@@ -102,12 +108,14 @@ class MainWindow extends BrowserWindow {
           {
             label: "Add Beat",
             accelerator: "B",
-            click: () => this.webContents.send("beats:add"),
+            click: () =>
+              this.webContents.send(eevents.incrementBeatCount.event),
           },
           {
             label: "Remove Beat",
             accelerator: "Control+B",
-            click: () => this.webContents.send("beats:remove"),
+            click: () =>
+              this.webContents.send(eevents.decrementBeatCount.event),
           },
         ],
       },
@@ -156,9 +164,12 @@ class MainWindow extends BrowserWindow {
   };
 
   ipcInit = () => {
-    ipcMain.on("app:req-shortcuts-list", () => {
+    ipcMain.on(eevents.requestShortcutsList.event, () => {
       try {
-        this.webContents.send("app:res-shortcuts-list", this.shortcuts);
+        this.webContents.send(
+          eevents.receiveShortcutsList.event,
+          this.shortcuts
+        );
       } catch (error) {
         console.log(error.message);
       }
