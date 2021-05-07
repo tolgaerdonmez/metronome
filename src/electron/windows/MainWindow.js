@@ -152,21 +152,21 @@ class MainWindow extends BrowserWindow {
         ],
       }));
 
-    // if (isDev) {
-    mainMenuTemplate.push({
-      label: "Developer Tools",
-      submenu: [
-        {
-          label: "Toggle DevTools",
-          click(item, focusedWindow) {
-            focusedWindow.toggleDevTools();
+    if (isDev) {
+      mainMenuTemplate.push({
+        label: "Developer Tools",
+        submenu: [
+          {
+            label: "Toggle DevTools",
+            click(item, focusedWindow) {
+              focusedWindow.toggleDevTools();
+            },
+            accelerator: process.platform === "darwin" ? "Command+I" : "Ctrl+I",
           },
-          accelerator: process.platform === "darwin" ? "Command+I" : "Ctrl+I",
-        },
-        { role: "reload" },
-      ],
-    });
-    // }
+          { role: "reload" },
+        ],
+      });
+    }
 
     const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
     Menu.setApplicationMenu(mainMenu);

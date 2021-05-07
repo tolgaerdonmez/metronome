@@ -1,7 +1,7 @@
 {
   "name": "metronome",
   "productName": "Focus Metronome",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "main": "build/electron/index.js",
   "homepage": "./",
