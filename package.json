@@ -54,7 +54,7 @@
     "mac": {
       "category": "public.app-category.music",
       "target": [
-        "mas"
+        "dmg"
       ],
       "provisioningProfile": "./embedded.provisionprofile",
       "icon": "src/assets/Icon.icns"
