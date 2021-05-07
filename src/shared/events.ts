@@ -1,4 +1,5 @@
 import { AppShortcut } from "../app/src/types/redux";
+import { ThemeName } from "../app/src/types/theme";
 import { createEventFactory } from "./EEvent";
 
 export const createEvents = (withIpc: boolean = true) => {
@@ -11,6 +12,7 @@ export const createEvents = (withIpc: boolean = true) => {
     changeToMainScreen: createEvent("app:main-screen"),
     toggleToFocusScreen: createEvent("app:toggle-focus"),
     changeSoundPreset: createEvent("app:change-sound-preset"),
+    changeColorTheme: createEvent<ThemeName>("app:change-color-theme"),
     incrementBeatCount: createEvent("beats:add"),
     decrementBeatCount: createEvent("beats:remove"),
     startStopBeats: createEvent("beats:start-stop"),

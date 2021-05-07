@@ -8,7 +8,7 @@ import { ReduxState } from "../../types/redux";
 import { setPreset, beats } from "../../store/actions/metronome";
 
 import { ArrowRight, ArrowLeft } from "../icons";
-import { useEEventOnOff } from "../../hooks";
+import { useEEventOnOff } from "../../hooks/eevents";
 
 const { eevents } = window;
 

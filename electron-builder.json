@@ -1,0 +1,25 @@
+{
+  "appId": "com.tolgaerdonmez.metronome",
+  "buildVersion": "3",
+  "files": ["build/**/*", "node_modules/**/*", "embedded.provisionprofile"],
+  "directories": {
+    "buildResources": "src/assets"
+  },
+  "mac": {
+    "category": "public.app-category.music",
+    "target": ["mas", "dmg"],
+    "provisioningProfile": "./embedded.provisionprofile",
+    "icon": "src/assets/Icon.icns"
+  },
+  "mas": {
+    "provisioningProfile": "./embedded.provisionprofile",
+    "entitlements": "build/entitlements.mas.plist",
+    "entitlementsInherit": "build/entitlements.mas.inherit.plist",
+    "icon": "src/assets/Icon.icns",
+    "hardenedRuntime": false,
+    "gatekeeperAssess": false
+  },
+  "dmg": {
+    "sign": false
+  }
+}

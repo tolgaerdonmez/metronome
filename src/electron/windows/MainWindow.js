@@ -44,6 +44,15 @@ class MainWindow extends BrowserWindow {
               this.webContents.send(eevents.changeToMainScreen.event),
           },
           {
+            label: "Change Theme",
+            submenu: ["classic", "radioactive"].map((theme) => ({
+              label:
+                theme.slice(0, 1).toUpperCase() + theme.slice(1, theme.length),
+              click: () =>
+                this.webContents.send(eevents.changeColorTheme.event, theme),
+            })),
+          },
+          {
             label: "App Shortcuts",
             accelerator: "Shift+S",
             click: () =>

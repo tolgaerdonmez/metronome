@@ -1,3 +1,5 @@
+import { ThemeName } from "./theme";
+
 export interface TapBpm {
   startTime: number;
   endTime: number;
@@ -25,6 +27,7 @@ export interface AppReducerState {
   focusMode: boolean;
   shortcuts: AppShortcut[];
   showShortcuts: boolean;
+  theme: ThemeName;
 }
 
 export interface ReduxState {

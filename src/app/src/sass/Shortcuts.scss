@@ -1,5 +1,3 @@
-@import "colors";
-
 .shortcuts-container * {
   margin: 0;
   padding: 0;
@@ -18,7 +16,7 @@
 
     padding: 1em;
 
-    background-color: $dark-gray;
+    background-color: var(--dark-gray);
     border-radius: 20px;
 
     .title {
@@ -45,12 +43,12 @@
   }
 
   p {
-    color: $text;
+    color: var(--text);
   }
   ul {
     list-style-type: none;
     li {
-      color: $text;
+      color: var(--text);
     }
   }
 }

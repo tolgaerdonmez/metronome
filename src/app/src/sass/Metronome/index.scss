@@ -1,4 +1,3 @@
-@import "../colors";
 @import "../values";
 
 .metronome-container {
@@ -29,7 +28,7 @@
 
   // padding: 10px;
 
-  background-color: $light-gray;
+  background-color: var(--light-gray);
   border-radius: 20px;
 
   .exit-focus-button {
@@ -37,8 +36,8 @@
     left: 20px;
     top: 20px;
 
-    background-color: $orange;
-    fill: $text;
+    background-color: var(--dark-gray);
+    fill: var(--text);
 
     border: none;
     border-radius: 50%;
@@ -48,7 +47,6 @@
 
     transition: all ease 300ms;
     &:hover {
-      background-color: darken($color: $orange, $amount: 5);
       transform: scale(1.1);
     }
   }
@@ -74,13 +72,14 @@
 .power-button {
   width: 80px;
   height: 80px;
-  fill: $dark-gray;
-  background-color: $light-gray-2;
-  border: 10px solid $light;
+  fill: var(--primary);
+  background-color: var(--light-gray);
+  border: 10px solid var(--dark-gray-2);
   border-radius: 50%;
   padding: 0;
 }
 .power-button-on {
-  background-color: $orange;
-  fill: $light;
+  background-color: var(--primary);
+  // fill: $light;
+  fill: var(--dark);
 }

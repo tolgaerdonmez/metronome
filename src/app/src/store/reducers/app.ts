@@ -5,6 +5,7 @@ const initialState: AppReducerState = {
   focusMode: false,
   shortcuts: [],
   showShortcuts: false,
+  theme: "classic",
 };
 
 interface Action {
@@ -26,6 +27,8 @@ export default (
         ...state,
         showShortcuts: payload === undefined ? !state.showShortcuts : payload,
       };
+    case ACTION.CHANGE_THEME:
+      return { ...state, theme: payload };
     case "MAIN_MENU":
       return { ...state, focusMode: false };
     case "RESET":

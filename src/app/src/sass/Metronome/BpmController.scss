@@ -1,4 +1,3 @@
-@import "../colors";
 @import "../values";
 
 .bpm-controller-container {
@@ -7,10 +6,10 @@
   margin: 0 40px;
 
   input {
-    background-color: $dark-gray;
-    border: 6px solid $dark-gray-2;
+    background-color: var(--dark-gray);
+    border: 6px solid var(--dark-gray-2);
     border-radius: 20px;
-    color: $text;
+    color: var(--text);
 
     width: 6ch;
     height: $height;
@@ -27,9 +26,6 @@
     }
 
     transition: background-color ease 300ms;
-    &:hover:not(:disabled) {
-      background-color: darken($dark-gray, 7);
-    }
   }
   div {
     display: flex;
@@ -42,8 +38,8 @@
 
       margin-left: 10px;
 
-      background-color: $dark-gray;
-      fill: $orange;
+      background-color: var(--dark-gray);
+      fill: var(--primary);
 
       border: none;
       border-radius: 20px;

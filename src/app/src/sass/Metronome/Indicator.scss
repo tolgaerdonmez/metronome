@@ -1,8 +1,7 @@
-@import "../colors";
 @import "../animations/blink";
 
 .indicator-container {
-  @include blink($dark-gray-2, $orange, 200ms);
+  @include blink(var(--dark-gray-2), var(--primary), 200ms);
   list-style-type: none;
   height: 150px;
   width: 100%;
@@ -12,15 +11,15 @@
 
   padding: 30px 0;
 
-  background-color: $light-gray;
+  background-color: var(--light-gray);
   li {
     border-radius: 50%;
 
-    background-color: $dark-gray-2;
+    background-color: var(--dark-gray-2);
   }
 
   &:hover {
-    background-color: darken($light-gray, 2);
+    background-color: var(--light-gray-darker);
     cursor: pointer;
   }
 }
@@ -29,7 +28,7 @@
   width: 100%;
   background-color: transparent;
   &:hover {
-    background-color: $light-gray;
+    background-color: var(--light-gray);
     cursor: default;
   }
 }

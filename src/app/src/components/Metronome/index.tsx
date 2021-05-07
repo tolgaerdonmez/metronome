@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactElement } from "react";
 import "../../sass/Metronome/index.scss";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -26,7 +26,7 @@ import { ArrowLeft } from "../icons";
 import TapBpmScreen from "./TapBpmScreen";
 import { toggleTapBpmFocus } from "../../store/actions/metronome";
 import { withSound } from "../../utils/sounds";
-import { useEEventOnOff } from "../../hooks";
+import { useEEventOnOff } from "../../hooks/eevents";
 
 const { eevents } = window;
 

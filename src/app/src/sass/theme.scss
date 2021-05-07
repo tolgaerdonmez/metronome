@@ -1,0 +1,30 @@
+body.classic {
+  --primary: rgba(224, 94, 65, 1);
+
+  --dark: rgba(22, 22, 22, 1);
+  --light: rgba(196, 196, 196, 1);
+
+  --light-gray: rgba(57, 57, 57, 1);
+  --light-gray-darker: rgb(50, 50, 50);
+  --light-gray-2: rgba(156, 156, 156, 1);
+  --dark-gray: rgba(98, 98, 98, 1);
+  --dark-gray-2: rgba(29, 29, 29, 1);
+
+  --text: white;
+}
+
+body.radioactive {
+  --primary: rgba(31, 255, 158);
+
+  --dark: rgb(19, 19, 42);
+  --light: rgba(196, 196, 196, 1);
+
+  --light-gray: rgb(29, 29, 65);
+  --light-gray-darker: rgb(26, 26, 62);
+  --light-gray-2: rgb(9, 85, 52);
+  --dark-gray: rgb(0, 45, 25);
+  --dark-gray-2: rgb(19, 19, 42);
+
+  --text: rgba(31, 255, 158);
+  // Thanks for this awesome palette to Puru Vijay
+}

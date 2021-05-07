@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { EEventListener, EEvent } from "../../shared/EEvent";
+import { EEventListener, EEvent } from "../../../shared/EEvent";
 
 export function useEEventOnOff<P = null>(
   eevent: EEvent<P>,

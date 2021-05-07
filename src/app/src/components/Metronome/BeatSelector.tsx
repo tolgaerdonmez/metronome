@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { ReduxState } from "../../types/redux";
 import { setBeats, setNotes } from "../../store/actions/metronome";
 import { withSound } from "../../utils/sounds";
-import { useEEventOnOff } from "../../hooks";
+import { useEEventOnOff } from "../../hooks/eevents";
 
 const { eevents } = window;
 

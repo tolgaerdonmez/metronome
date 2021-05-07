@@ -1,18 +1,16 @@
-@import "../colors";
-
 .tab-bpm-screen-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  background-color: $light-gray;
+  background-color: var(--light-gray);
 
   & > p {
     margin: 0;
     padding: 0;
 
-    color: $text;
+    color: var(--text);
     font-size: 2em;
   }
 
@@ -30,8 +28,8 @@
     .tab-bpm-button {
       padding: 15px 30px;
 
-      background-color: $orange;
-      color: $text;
+      background-color: var(--primary);
+      color: var(--text);
       border: none;
       border-radius: 20px;
 
@@ -48,7 +46,7 @@
       width: 100%;
       height: $icon-width;
 
-      fill: $text;
+      fill: var(--text);
 
       border-radius: 50%;
 
