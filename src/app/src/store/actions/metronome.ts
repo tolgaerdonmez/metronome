@@ -172,7 +172,7 @@ export const incrementTapCount = (): ThunkAction<
       tapBpm: { count },
     },
   } = getState();
-  console.log("increment tap count");
+
   const newEndTime = Date.now();
   dispatch(setTapBpm({ endTime: newEndTime, count: count + 1 }));
   dispatch(calculateTappedBpm());

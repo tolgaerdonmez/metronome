@@ -64,9 +64,9 @@ function Metronome(): ReactElement {
     [dispatch, bpm]
   );
 
-  useEEventOnOff(
+  useEEventOnOff<null>(
     eevents.tapBpm,
-    withSound(() => {
+    () => {
       if (tapBpm.focusMode) {
         if (playing) dispatch(stopBeats());
         if (tapBpm.startTime) dispatch(incrementTapCount());
@@ -74,7 +74,7 @@ function Metronome(): ReactElement {
       } else {
         dispatch(toggleTapBpmFocus());
       }
-    }),
+    },
     [dispatch, tapBpm.count, tapBpm.startTime, tapBpm.focusMode, playing]
   );
 

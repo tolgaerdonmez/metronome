@@ -36,7 +36,7 @@ function TapBpmScreen(): ReactElement {
       <p>Tap the button or T in keyboard</p>
       <BpmController controllable={false} />
       <div>
-        <UIButton className="tab-bpm-button" onClick={tap}>
+        <UIButton audio={false} className="tab-bpm-button" onClick={tap}>
           Tap!
         </UIButton>
         <CSSTransition

@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactElement } from "react";
 import "../../sass/Metronome/BeatSelector.scss";
 
 import UIButton from "../UIButton";
@@ -49,6 +49,9 @@ function BeatSelector(): ReactElement {
           <p>Beats:</p>
           <div>
             <UIButton icon={Minus} onClick={() => changeBeats(-1)} />
+            <div className="data-container">
+              <p>{beats}</p>
+            </div>
             <UIButton icon={Plus} onClick={() => changeBeats(1)} />
           </div>
         </div>
@@ -56,14 +59,12 @@ function BeatSelector(): ReactElement {
           <p>Notes:</p>
           <div>
             <UIButton icon={Minus} onClick={() => changeNotes(-1)} />
+            <div className="data-container">
+              <p>{2 ** notes}</p>
+            </div>
             <UIButton icon={Plus} onClick={() => changeNotes(1)} />
           </div>
         </div>
-      </div>
-      <div className="beat-screen">
-        <p>{beats}</p>
-        <div />
-        <p>{2 ** notes}</p>
       </div>
     </div>
   );

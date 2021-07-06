@@ -25,11 +25,21 @@
       flex-direction: row;
       justify-content: center;
       align-items: center;
-      p {
+
+      $_margin: 5px;
+      &:nth-child(1) {
+        margin-bottom: $_margin;
+      }
+      &:nth-child(2) {
+        margin-top: $_margin;
+      }
+
+      & > p {
         flex: 1 0 100px;
         color: var(--text);
         font-size: 2em;
       }
+
       & > div {
         flex: 1 0;
         display: flex;
@@ -37,7 +47,7 @@
         justify-content: center;
         align-items: center;
 
-        margin-left: 15px;
+        margin-left: 5px;
 
         .icon-button {
           width: 25px;
@@ -53,6 +63,7 @@
       }
     }
   }
+
   .beat-screen {
     display: flex;
     flex-direction: column;
@@ -70,5 +81,27 @@
       background-color: var(--text);
       border-radius: 20px;
     }
+  }
+}
+
+.data-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--dark-gray);
+  border: 6px solid var(--dark-gray-2);
+  border-radius: 20px;
+
+  width: 3.3em;
+  height: 3.3em;
+
+  margin: 0 10px;
+
+  p {
+    color: var(--text);
+
+    text-align: center;
+    font-size: 2em;
   }
 }
